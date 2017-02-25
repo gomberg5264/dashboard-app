@@ -4,7 +4,18 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+var session = require('express-session');
+var passport = require('passport');
+
+var index = require('./routes/index');
+var authRoutes = require('./routes/auth.js');
+var userRoutes = require('./routes/user.js');
+var app = express();
+
+// load environment variables
 require('dotenv').config();
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -29,8 +40,19 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client/build')));
 
+// to use our express-session and passport middlewares
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/auth', authRoutes);
+
 
 // Always return the main index.html, so react-router can render the route in the client
 app.get('/api', (req, res) => {

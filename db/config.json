@@ -1,7 +1,7 @@
 {
   "development": {
     "password": null,
-    "database": "movies_app_development",
+    "database": "dashboard_app_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

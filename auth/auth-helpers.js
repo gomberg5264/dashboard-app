@@ -5,3 +5,39 @@ const models = require('../db/models/index');
 function comparePass(userPassword, databasePassword) {
   return bcrypt.compareSync(userPassword, databasePassword);
 }
+
+function loginRedirect(req, res, next) {
+  if (req.user) return res.status(401).json(
+    { status: 'You are already logged in' }
+  );
+
+  return next();
+}
+
+function createUser(req, res) {
+  const salt = bcrypt.genSaltSync();
+  const hash = bcrypt.hashSync(req.body.password, salt);
+
+  return models.User.create({
+    username: req.body.username,
+    password: hash,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+  }).then(() => {
+    res.redirect('/');
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

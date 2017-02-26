@@ -9,17 +9,12 @@ var session = require('express-session');
 var passport = require('passport');
 
 var index = require('./routes/index');
-var authRoutes = require('./routes/auth.js');
-var userRoutes = require('./routes/user.js');
+var authRoutes = require('./routes/auth');
+var userRoutes = require('./routes/users');
 var app = express();
 
 // load environment variables
 require('dotenv').config();
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,16 +44,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/index', index);
+app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
-
 
 // Always return the main index.html, so react-router can render the route in the client
 app.get('/api', (req, res) => {
   res.json({ message: 'hello world' });
 });
 
+// every other route goes here
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 });

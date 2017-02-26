@@ -5,16 +5,19 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(32),
       unique: true
     },
-    password: DataTypes.TEXT,
-    firstname: DataTypes.TEXT,
-    lastname: DataTypes.TEXT,
-    email: DataTypes.TEXT
+    password: DataTypes.STRING,
+    email: DataTypes.STRING,
+    firstname: DataTypes.STRING,
+    lastname: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        User.hasMany(models.Todo);
       }
     }
   });
   return User;
 };
+
+

@@ -11,7 +11,11 @@ var passport = require('passport');
 var index = require('./routes/index');
 var authRoutes = require('./routes/auth');
 var userRoutes = require('./routes/users');
+var todoRoutes = require('./routes/todo');
 var app = express();
+
+// store the user_id, the primary key/ foreign key for all models
+var user_id = null;
 
 // load environment variables
 require('dotenv').config();
@@ -47,10 +51,16 @@ app.use(passport.session());
 app.use('/index', index);
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
+app.use('/todo', todoRoutes);
 
 // Always return the main index.html, so react-router can render the route in the client
 app.get('/api', (req, res) => {
   res.json({ message: 'hello world' });
+});
+
+app.get('/user', (req, res) => {
+  user_id = req.user.dataValues.id;
+  res.redirect('/');
 });
 
 // every other route goes here

@@ -14,9 +14,9 @@ import StockMarket from './components/StockMarket';
 
 class App extends Component {
   componentDidMount() {
-    axios.get('/api')
+    axios.get('/user')
     .then((response) => {
-      console.log(response);
+      // console.log(response);
     })
     .catch((err) => { console.error(err); });
   }
@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="main_App">
           <Grid>
             <Row className="show-grid">
               <Col xs={6} md={3}><code>&lt;{'Col xs={6} md={3}'} /&gt;</code>

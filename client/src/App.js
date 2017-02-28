@@ -6,7 +6,7 @@ import './stylesheets/App.css';
 import About from './components/About';
 import NotFound from './components/NotFound';
 import Todo from './components/Todo';
-import Twitter from './components/Twitter';
+import PopularLinks from './components/PopularLinks';
 import News from './components/News';
 import Postit from './components/Postit';
 import Weather from './components/Weather';
@@ -28,7 +28,7 @@ class App extends Component {
           <Grid>
             <Row className="show-grid">
               <Col xs={6} md={3}><code>&lt;{'Col xs={6} md={3}'} /&gt;</code>
-                <Twitter />
+                <PopularLinks />
               </Col>
               <Col xs={6} md={6}><code>&lt;{'Col xs={6} md={6}'} /&gt;</code>
                 <News />

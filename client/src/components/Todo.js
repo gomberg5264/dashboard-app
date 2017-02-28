@@ -53,7 +53,7 @@ class Todo extends Component {
   }
 
   updateTodo(id, title) {
-    const content = `<input type="text" value="${title}" id="todo-input-${id}" />
+    const content = `<input class="inputClass" type="text" value="${title}" id="todo-input-${id}" />
                      <input type="submit" value="Save" id="add-todo-${id}" />`;
     var newTitle = null;
     $(`#todo-${id}`).html(content);
@@ -79,9 +79,11 @@ class Todo extends Component {
   listTodos() {
       return (
         this.state.list.map(elem => (
-          <li id={`todo-${elem.id}`}>{elem.title}
-            <Glyphicon onClick={() => this.deleteTodo(elem.id)} glyph="glyphicon glyphicon-trash align-right" />
-            <Glyphicon onClick={() => this.updateTodo(elem.id, elem.title)} glyph="glyphicon glyphicon-pencil align-right" />
+          <li id={`todo-${elem.id}`}><span className="pull-left">{elem.title}</span>
+              &nbsp;&nbsp;&nbsp;
+            <Glyphicon className="pull-right" onClick={() => this.deleteTodo(elem.id)} glyph="glyphicon glyphicon-trash align-right" />
+            &nbsp;&nbsp;
+            <Glyphicon className="pull-right" onClick={() => this.updateTodo(elem.id, elem.title)} glyph="glyphicon glyphicon-pencil align-right" />
           </li>
           )
         )
@@ -91,12 +93,10 @@ class Todo extends Component {
   render() {
     return (
       <div className="main_Todo text-center">
-        <h2>Todo List</h2>
+        <h2>Todos</h2>
         <hr />
-        <ul>
-          {this.listTodos()}
-        </ul>
         <input
+          className="inputClass"
           type="text"
           placeholder="Add Todo Item"
           ref={(input) => { this.todoItem = input; }}
@@ -108,6 +108,9 @@ class Todo extends Component {
           value="Add"
           onClick={this.addTodo}
         />
+        <ul>
+          {this.listTodos()}
+        </ul>
     </div>
     );
   }

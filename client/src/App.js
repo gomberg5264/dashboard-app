@@ -27,29 +27,28 @@ class App extends Component {
         <div className="main_App">
           <Grid>
             <Row className="show-grid">
-              <Col xs={6} md={3}><code>&lt;{'Col xs={6} md={3}'} /&gt;</code>
+              <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
                 <PopularLinks />
               </Col>
-              <Col xs={6} md={6}><code>&lt;{'Col xs={6} md={6}'} /&gt;</code>
+              <Col xs={12} sm={12} md={6} lg={6} className="oneColumn">
                 <News />
               </Col>
-              <Col xsHidden md={3}><code>&lt;{'Col xsHidden md={3}'} /&gt;</code>
+              <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
                 <Todo />
               </Col>
-            </Row>
-            <Row className="show-grid">
-              <Col xs={6} md={4}><code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
+              <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
                 <Postit />
               </Col>
-              <Col xs={6} md={4}><code>&lt;{'Col xs={6} md={4}'} /&gt;</code>
+              <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
                 <Weather />
               </Col>
-              <Col xsHidden md={4}><code>&lt;{'Col xsHidden md={4}'} /&gt;</code>
+              <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
                 <StockMarket />
               </Col>
             </Row>
           </Grid>
           <div>
+            {'asdfasdf'}
             {/* <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />

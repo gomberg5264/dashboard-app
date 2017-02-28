@@ -49,7 +49,7 @@ class StockMarket extends Component {
   render() {
     return (
       <div className="main_StockMarket text-center">
-        <h2>Market Data</h2>
+        <h2>Stock Market</h2>
         <hr />
         <input
           className="inputClass"

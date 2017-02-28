@@ -13,6 +13,7 @@ var authRoutes = require('./routes/auth');
 var userRoutes = require('./routes/users');
 var todoRoutes = require('./routes/todo');
 var weatherRoutes = require('./routes/weather');
+var postitRoutes = require('./routes/postit');
 var app = express();
 
 // store the user_id, the primary key/ foreign key for all models
@@ -54,6 +55,7 @@ app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/todo', todoRoutes);
 app.use('/weather', weatherRoutes);
+app.use('/postit', postitRoutes);
 
 // Always return the main index.html, so react-router can render the route in the client
 app.get('/api', (req, res) => {

@@ -3,5 +3,6 @@
   background-color: lightblue;
   padding: 5px;
   height: 25rem;
+  overflow: scroll;
 }
 

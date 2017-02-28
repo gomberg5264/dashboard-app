@@ -59,14 +59,24 @@ class Weather extends Component {
 
   weatherInfo() {
     if (this.state.currentCity !== null) {
+      const weatherIcons = ['cloud', 'sun', 'clear', 'rain', 'snow', 'thunder' ];
+      var iconClass = null;
+      weatherIcons.map((desc, idx) => {
+        if (this.state.currentSummary.match(`${desc}`) !== null) {
+          iconClass = weatherIcons[idx];
+        }
+      })
+
       return (
         <ul>
-          <li>City: {this.state.currentCity}</li>
-          <li>Temp: {this.state.currentTemp}</li>
-          <li>Min Temp: {this.state.currentTempMin}</li>
-          <li>Max Temp: {this.state.currentTempMax}</li>
-          <li>Details: {this.state.currentSummary}</li>
-          <li>Humidity: {this.state.currentHumidity}</li>
+          <div className={iconClass + " iconClass"} />
+          <h3><span className="cityName">{this.state.currentCity}</span></h3>
+          <div className="currentTemp">{this.state.currentTemp} &#8457;</div>
+          <div className="details">
+            <li>{this.state.currentTempMin} &#8457;/{this.state.currentTempMax} &#8457;</li>
+            <li>{this.state.currentSummary}</li>
+            <li>Humidity: {this.state.currentHumidity}%</li>
+          </div>
         </ul>
       )
     }
@@ -74,20 +84,25 @@ class Weather extends Component {
 
   render() {
     return (
-      <div className="main_Weather">
-        <h1>Weather</h1>
+      <div className="main_Weather text-center">
+        <h2>Weather</h2>
+        <hr />
         <ul>
         </ul>
         <input
+          className="input_class"
           type="text"
           placeholder="Enter a zipcode"
           ref={(input) => { this.zipCode = input; }}
         />
+        &nbsp;
         <input
+          className="add_button"
           type="button"
           value="Enter"
           onClick={this.addZipcode}
         />
+        <br />
         {this.weatherInfo()}
     </div>
     );

@@ -19,4 +19,8 @@ textarea {
 
 .one_note {
   border: 1px solid white;
+  width: 90%;
+  margin: 0 auto;
+  height: 3rem;
+  overflow: scroll;
 }

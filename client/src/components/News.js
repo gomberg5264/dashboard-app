@@ -25,11 +25,16 @@ class News extends Component {
     if (this.state.articles.length > 0) {
       return (
         this.state.articles.map((article) => (
-          <a href={article.url} target="_blank">
-            <h4>{article.title}</h4>
-            <img src={article.urlToImage} height="150px" width="300px"/>
-            <li>{article.description}</li>
-          </a>
+          <div className="one_article">
+            <a href={article.url} target="_blank">
+              <h3 className="header">{article.title}</h3>
+              <br />
+              <img src={article.urlToImage} height="150px" width="300px"/>
+              <br /><br />
+              <h4><li>{article.description}</li></h4>
+            </a>
+            <br />
+          </div>
           )
         )
       )
@@ -41,8 +46,9 @@ class News extends Component {
 
   render() {
     return (
-      <div className="main_News">
-        <h1>Latest News</h1>
+      <div className="main_News text-center">
+        <h2>Latest News</h2>
+        <hr />
         <ul>
           {this.showLatestNews()}
         </ul>

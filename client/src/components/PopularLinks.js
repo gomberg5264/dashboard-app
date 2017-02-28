@@ -42,7 +42,7 @@ class PopularLinks extends Component {
   render() {
     return (
       <div className="main_PopularLinks text-center">
-        <h2>Popular Links</h2>
+        <h2>Daily Apps</h2>
         <hr />
         <ul>
           {this.showList()}

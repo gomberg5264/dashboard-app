@@ -23,7 +23,7 @@ class Postit extends Component {
   showNote() {
     if (this.state.notes.length > 0) {
       return (
-        this.state.notes.map(note =>
+        this.state.notes.reverse().map(note =>
           <li>{note}</li>
         )
       )

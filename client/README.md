@@ -8,10 +8,10 @@
 ### Technologies Used:
     In terms of classical MVC web framework, for Model I used Postgrés, for View I used React, and for Controller I used Express.
     Details:
-    ```
-        * HTML5/CSS3/JS6
-        * Node/Express
-        * React
-        * Postgrés
-        * 3rd Party APIs: Google Finance API for Stock Market Data, Open Weather API for Weather Data, News API for top latest news of the day. 
-    ```
+    * HTML5/CSS3/JS6
+    * Node/Express
+    * React
+    * Postgrés
+    * 3rd Party APIs: Google Finance API for Stock Market Data, Open Weather API for Weather Data, News API for top latest news of the day. 
+    
+

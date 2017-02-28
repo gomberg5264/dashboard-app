@@ -24,7 +24,7 @@ class Postit extends Component {
     if (this.state.notes.length > 0) {
       return (
         this.state.notes.reverse().map(note =>
-          <li>{note}</li>
+          <li className="one_note">{note}</li>
         )
       )
     }
@@ -32,8 +32,12 @@ class Postit extends Component {
 
   render() {
     return (
-      <div className="main_Postit">
-        <h1>Postit</h1>
+      <div className="main_Postit text-center">
+        <h2>Postit</h2>
+        <hr />
+        <ul>
+          {this.showNote()}
+        </ul>
         <textarea
           rows="4"
           cols="45"
@@ -41,14 +45,14 @@ class Postit extends Component {
           placeholder="Add a quick note!"
           ref={(input) => { this.note = input; }}
         />
-        <input
-          type="button"
-          value="Add"
-          onClick={this.saveNote}
-        />
-        <ul>
-          {this.showNote()}
-        </ul>
+        <div>
+          <input
+            type="button"
+            className="add_button"
+            value="Add"
+            onClick={this.saveNote}
+          />
+        </div>
     </div>
     );
   }

@@ -90,8 +90,9 @@ class Todo extends Component {
 
   render() {
     return (
-      <div className="main_Todo">
-        <h1>Todo List</h1>
+      <div className="main_Todo text-center">
+        <h2>Todo List</h2>
+        <hr />
         <ul>
           {this.listTodos()}
         </ul>
@@ -100,7 +101,9 @@ class Todo extends Component {
           placeholder="Add Todo Item"
           ref={(input) => { this.todoItem = input; }}
         />
+        &nbsp;
         <input
+          className="add_button"
           type="button"
           value="Add"
           onClick={this.addTodo}

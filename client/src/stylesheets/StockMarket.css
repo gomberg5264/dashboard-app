@@ -1,7 +1,26 @@
 .main_StockMarket {
   border: 1px solid black;
-  background-color: lightblue;
+  background-color: rgba(1,1,1,0.1);
   padding: 5px;
-  height: 25rem;
+  height: 28rem;
+  box-shadow: 0 8px 16px 0 white, 0 6px 20px 0 white;
+  border-radius: 8%;
+  color: white;
+  font-family: 'Federo', sans-serif;
 }
 
+.input_button {
+  background-color: black;
+}
+
+.inputClass {
+  color: black;
+}
+
+.stockDesc {
+  font-size: 20px;
+}
+
+.stockPrice {
+  font-size: 18px;
+}

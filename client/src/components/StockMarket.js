@@ -37,8 +37,8 @@ class StockMarket extends Component {
     if (this.state.tickerSymbol !== null) {
       return (
         <ul>
-          <li>{this.state.market}: {this.state.tickerSymbol}</li>
-          <li>$ {this.state.currentPrice}</li>
+          <li className="stockDesc">{this.state.market}: {this.state.tickerSymbol}</li>
+          <li className="stockPrice">$ {this.state.currentPrice}</li>
           <li>Change: {this.state.lastChange}</li>
           <li>Last Updated: {this.state.lastUpdate}</li>
         </ul>
@@ -48,18 +48,23 @@ class StockMarket extends Component {
 
   render() {
     return (
-      <div className="main_StockMarket">
-        <h1>Market Data</h1>
+      <div className="main_StockMarket text-center">
+        <h2>Market Data</h2>
+        <hr />
         <input
+          className="inputClass"
           type="text"
           placeholder="Enter a Ticker Symbol"
           ref={(input) => { this.stockSymbol = input; }}
         />
+        &nbsp;
         <input
+          className="input_button"
           type="button"
           value="Quote"
           onClick={this.getStockData}
         />
+
         {this.showData()}
       </div>
     );

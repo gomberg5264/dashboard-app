@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/PopularLinks.css';
+import { SocialIcon } from 'react-social-icons';
 
 class PopularLinks extends Component {
   constructor() {
@@ -9,18 +10,40 @@ class PopularLinks extends Component {
 
   showList() {
     return (
-      <div>
-        <a href="https://www.facebook.com" target="_blank"><li>Facebook</li></a>
-        <a href="https://www.twitter.com" target="_blank"><li>Twitter</li></a>
-        <a href="https://www.github.com" target="_blank"><li>GitHub</li></a>
+      <div className="align-center">
+        <li>
+            <SocialIcon url="http://facebook.com" />
+            &nbsp;<SocialIcon url="http://twitter.com" />
+            &nbsp;<SocialIcon url="http://youtube.com" />
+        </li>
+        <br />
+        <li>
+            <SocialIcon url="http://dropbox.com" />
+            &nbsp;<SocialIcon url="http://github.com" />
+            &nbsp;<SocialIcon url="https://plus.google.com" />
+        </li>
+        <br />
+        <li>
+            <SocialIcon url="http://pinterest.com" />
+            &nbsp;<SocialIcon url="http://linkedin.com" />
+            &nbsp;<SocialIcon url="http://tumblr.com" />
+        </li>
+        <br />
+        <li>
+            <SocialIcon url="http://flickr.com" />
+            &nbsp;<SocialIcon url="http://foursquare.com" />
+            &nbsp;<SocialIcon url="http://meetup.com" />
+        </li>
+        <br />
       </div>
     )
   }
 
   render() {
     return (
-      <div className="main_PopularLinks">
-        <h1>Popular Links</h1>
+      <div className="main_PopularLinks text-center">
+        <h2>Popular Links</h2>
+        <hr />
         <ul>
           {this.showList()}
         </ul>

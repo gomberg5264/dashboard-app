@@ -1,8 +1,12 @@
-.main_WitAI {
+.main_News {
   border: 1px solid black;
   background-color: lightblue;
   padding: 5px;
   height: 40rem;
   margin-bottom: 1.5rem;
+  overflow: scroll;
 }
 
+a:link {
+    text-decoration: none;
+}

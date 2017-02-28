@@ -7,7 +7,7 @@ import About from './components/About';
 import NotFound from './components/NotFound';
 import Todo from './components/Todo';
 import Twitter from './components/Twitter';
-import WitAI from './components/WitAI';
+import News from './components/News';
 import Postit from './components/Postit';
 import Weather from './components/Weather';
 import StockMarket from './components/StockMarket';
@@ -31,7 +31,7 @@ class App extends Component {
                 <Twitter />
               </Col>
               <Col xs={6} md={6}><code>&lt;{'Col xs={6} md={6}'} /&gt;</code>
-                <WitAI />
+                <News />
               </Col>
               <Col xsHidden md={3}><code>&lt;{'Col xsHidden md={3}'} /&gt;</code>
                 <Todo />

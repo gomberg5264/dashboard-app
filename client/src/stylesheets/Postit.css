@@ -13,6 +13,7 @@
 textarea {
   color: black;
 }
+
 .add_button {
   background-color: black;
 }
@@ -21,6 +22,11 @@ textarea {
   border: 1px solid white;
   width: 90%;
   margin: 0 auto;
-  height: 3rem;
+  height: 9rem;
   overflow: scroll;
+  margin-bottom: 0.2rem;
+}
+
+.deleteIcon {
+  margin-right: 1rem;
 }

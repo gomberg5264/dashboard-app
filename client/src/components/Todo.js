@@ -111,7 +111,7 @@ class Todo extends Component {
         <ul>
           {this.listTodos()}
         </ul>
-    </div>
+      </div>
     );
   }
 }

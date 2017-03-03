@@ -79,7 +79,9 @@ app.get('/user', (req, res) => {
 
 // every other route goes here
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+  // res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+  const index = path.join(__dirname, 'client/build', 'index.html');
+  res.sendFile(index);
 });
 
 // catch 404 and forward to error handler

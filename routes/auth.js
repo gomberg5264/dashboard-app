@@ -18,9 +18,20 @@ router.post('/register', (req, res, next)  => {
   .catch((err) => { res.status(500).json({ status: 'error' }); });
 });
 
-// test if the user is already is logged in or not before login
-router.get('/login', authHelpers.loginRedirect, (req, res)=> {
-  res.render('auth/login');
+// // test if the user is already is logged in or not before login
+// router.get('/login', authHelpers.loginRedirect, (req, res)=> {
+//   res.render('auth/login');
+// });
+
+router.get('/login', (req, res)=> {
+  if (req.user) {
+    return res.json(
+      { status: 'You are already logged in' }
+    )}
+  else {
+    return res.json(
+      { status: 'You are not logged in yet' }
+    )}
 });
 
 // user be able to login to his account

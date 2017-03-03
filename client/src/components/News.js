@@ -17,7 +17,7 @@ class News extends Component {
       this.setState({
         articles: res.data.articles
       })
-      console.log(res.data.articles);
+      // console.log(res.data.articles);
     })
   }
 

@@ -11,21 +11,19 @@ import News from './components/News';
 import Postit from './components/Postit';
 import Weather from './components/Weather';
 import StockMarket from './components/StockMarket';
+import Login from './components/Login';
 
 class App extends Component {
-  componentDidMount() {
-    axios.get('/user')
-    .then((response) => {
-      // console.log(response);
-    })
-    .catch((err) => { console.error(err); });
-  }
-
-  render() {
+   render() {
     return (
       <BrowserRouter>
         <div className="main_App">
           <Grid>
+            <Row className="show-grid">
+              <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
+               <Login  />
+              </Col>
+            </Row>
             <Row className="show-grid">
               <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
                 <PopularLinks />
@@ -40,7 +38,7 @@ class App extends Component {
                 <Postit />
               </Col>
               <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
-                <Weather />
+                <Weather  />
               </Col>
               <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
                 <StockMarket />
@@ -48,7 +46,6 @@ class App extends Component {
             </Row>
           </Grid>
           <div>
-            {'asdfasdf'}
             {/* <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />

@@ -3,6 +3,7 @@ import '../stylesheets/Todo.css';
 import axios from 'axios';
 import {Button, Glyphicon} from 'react-bootstrap';
 import $ from 'jquery';
+import alertify from 'alertify.js';
 
 class Todo extends Component {
   constructor() {
@@ -28,16 +29,24 @@ class Todo extends Component {
   }
 
   addTodo() {
-    axios.post('/todo/new', {
-      data: this.todoItem.value
-    })
+    axios.get('auth/login')
     .then((response) => {
-      if (response.data['success']) {
-        this.todoItem.value = null;
-        this.componentDidMount();
+      if (response.data.status === 'You are not logged in yet') {
+        alertify.alert('Please login or register before adding a todo item. Thank you.');
       }
-    })
-    .catch((err) => { console.error(err); });
+      if (response.data.status === 'You are already logged in') {
+        axios.post('/todo/new', {
+          data: this.todoItem.value
+        })
+        .then((response) => {
+          if (response.data['success']) {
+            this.todoItem.value = null;
+            this.componentDidMount();
+          }
+        })
+        .catch((err) => { console.error(err); });
+      }
+   });
   }
 
   deleteTodo(id) {

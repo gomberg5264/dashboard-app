@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../stylesheets/Postit.css';
 import axios from 'axios';
 import {Button, Glyphicon} from 'react-bootstrap';
+import alertify from 'alertify.js';
 
 class Postit extends Component {
   constructor() {
@@ -26,16 +27,24 @@ class Postit extends Component {
   }
 
   addNote() {
-    axios.post('/postit/new', {
-      data: this.note.value
-    })
+    axios.get('auth/login')
     .then((response) => {
-      if (response.data['success']) {
-        this.note.value = null;
-        this.componentDidMount();
+      if (response.data.status === 'You are not logged in yet') {
+        alertify.alert('Please login or register before adding a quick note. Thank you.');
+      }
+      if (response.data.status === 'You are already logged in') {
+        axios.post('/postit/new', {
+          data: this.note.value
+        })
+        .then((response) => {
+          if (response.data['success']) {
+            this.note.value = null;
+            this.componentDidMount();
+          }
+        })
+        .catch((err) => { console.error(err); });
       }
     })
-    .catch((err) => { console.error(err); });
   }
 
   deleteNote(id) {

@@ -18,7 +18,7 @@ class StockMarket extends Component {
 
   getStockData() {
     // http://finance.google.com/finance/info?client=ig&q=AAPL
-    axios.get(`https://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`)
+    axios.get(`http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`)
     .then((response) => {
       const jsonData = JSON.parse(response.data.slice(5,response.data.length-2));
       this.setState({

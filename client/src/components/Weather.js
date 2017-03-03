@@ -37,7 +37,7 @@ class Weather extends Component {
       var lng = response.data.results[0].geometry.location.lng;
       var lat = response.data.results[0].geometry.location.lat;
       var city = response.data.results[0].address_components[1].long_name;
-      axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=${this.zipCode.value},us&appid=5fa0a6844ee0178fe0f7a7b05a3f3032`)
+      axios.get(`https://api.openweathermap.org/data/2.5/forecast?zip=${this.zipCode.value},us&appid=5fa0a6844ee0178fe0f7a7b05a3f3032`)
       .then((res) => {
         this.zipCode.value = null;
         this.setState({

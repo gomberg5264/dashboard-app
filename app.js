@@ -80,7 +80,7 @@ app.get('/user', (req, res) => {
 // every other route goes here
 app.get('*', (req, res) => {
   // res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
-  res.sendFile('./client/build/index.html');
+  res.sendFile(__dirname + '/client/build/index.html');
 });
 
 // catch 404 and forward to error handler

@@ -52,11 +52,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // cross origin header issue
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 // routes for react components
 app.use('/index', index);
@@ -79,8 +79,8 @@ app.get('/user', (req, res) => {
 
 // every other route goes here
 app.get('*', (req, res) => {
-  // res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
-  res.sendFile(path.resolve(process.env.PWD, 'client/build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+  // res.sendFile(express.static(path.join(__dirname, 'client/build', 'index.html')));
 });
 
 // catch 404 and forward to error handler

@@ -49,7 +49,7 @@ class Weather extends Component {
           currentTime: res.data.list[0].dt,
           currentHumidity: res.data.list[0].main.humidity
         })
-        console.log(this.state);
+        // console.log(this.state);
       })
     })
     .catch(function (error) {

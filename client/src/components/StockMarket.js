@@ -31,8 +31,9 @@ class StockMarket extends Component {
       url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
     })
     .done((response) => {
-      console.log(response);
-      const jsonData = JSON.parse(response.data.slice(5,response.data.length-2));
+      console.log(response[0]);
+      const jsonData = response[0];
+      // const jsonData = JSON.parse(response.data.slice(5,response.data.length-2));
       this.setState({
         market: jsonData.e,
         currentPrice: jsonData.l_fix,

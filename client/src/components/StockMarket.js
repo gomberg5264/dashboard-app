@@ -21,11 +21,17 @@ class StockMarket extends Component {
     // http://finance.google.com/finance/info?client=ig&q=AAPL
     // axios.get(`http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`)
     $.ajax({
-      type: "GET",
-      headers: {"Access-Control-Allow-Origin": "*"},
+      type: 'GET',
+      dataType: 'JSONP',
+      crossDomain: true,
+      headers:
+        {
+          'Access-Control-Allow-Origin': '*'
+        },
       url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
     })
     .done((response) => {
+      console.log(response);
       const jsonData = JSON.parse(response.data.slice(5,response.data.length-2));
       this.setState({
         market: jsonData.e,

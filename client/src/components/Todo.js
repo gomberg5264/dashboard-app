@@ -18,14 +18,19 @@ class Todo extends Component {
   }
 
   componentDidMount() {
-    axios.get('/todo/list')
+    axios.get('auth/login')
     .then((response) => {
-      this.setState({
-        list: response.data['list']
-      })
-      // console.log(response);
+      if (response.data.status === 'You are already logged in') {
+        axios.get('/todo/list')
+        .then((response) => {
+          this.setState({
+            list: response.data['list']
+          })
+          // console.log(response);
+        })
+        .catch((err) => { console.error(err); });
+      }
     })
-    .catch((err) => { console.error(err); });
   }
 
   addTodo() {

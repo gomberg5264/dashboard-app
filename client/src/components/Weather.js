@@ -32,7 +32,7 @@ class Weather extends Component {
   }
 
   addZipcode() {
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.zipCode.value}&key=AIzaSyC612Te57jvPruYLaFSOTsl67ju82g714A`)
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.zipCode.value}&key=${apiKeys.googleMapsAPI}`)
     .then((response) => {
       var lng = response.data.results[0].geometry.location.lng;
       var lat = response.data.results[0].geometry.location.lat;

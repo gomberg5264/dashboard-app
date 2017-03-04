@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../stylesheets/News.css';
 import axios from 'axios';
+import apiKeys from '../config.js';
 
 class News extends Component {
   constructor() {
@@ -12,7 +13,7 @@ class News extends Component {
   }
 
   componentDidMount() {
-    axios.get(`https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=84c64f8b7b9b43a39644758899bb99b6`)
+    axios.get(`https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=${apiKeys.newsAPI}`)
     .then((res) => {
       this.setState({
         articles: res.data.articles

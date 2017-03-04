@@ -16,14 +16,19 @@ class Postit extends Component {
   }
 
   componentDidMount() {
-    axios.get('/postit/list')
+    axios.get('auth/login')
     .then((response) => {
-      this.setState({
-        notes: response.data['list']
-      })
-      // console.log(this.state.notes);
+      if (response.data.status === 'You are already logged in') {
+        axios.get('/postit/list')
+        .then((response) => {
+          this.setState({
+            notes: response.data['list']
+          })
+          // console.log(this.state.notes);
+        })
+        .catch((err) => { console.error(err); });
+      }
     })
-    .catch((err) => { console.error(err); });
   }
 
   addNote() {

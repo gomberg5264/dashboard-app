@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/StockMarket.css';
-import axios from 'axios';
-// import $ from 'jquery';
+import $ from 'jquery';
 
 class StockMarket extends Component {
 
@@ -17,31 +16,16 @@ class StockMarket extends Component {
     }
   }
 
+  // making cross origin browser request using jquery: crossDomain: true
   getStockData() {
-      // axios.get(`http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`)
-      // headers:
-      //   {
-      //     'Access-Control-Allow-Origin': '*'
-      //   },
-    //   $.ajax({
-    //   type: 'GET',
-    //   dataType: 'JSONP',
-    //   crossDomain: true,
-    //   url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
-    // })
-
-    axios({
-      method: 'get',
+    $.ajax({
+      type: 'GET',
+      dataType: 'JSONP',
+      crossDomain: true,
       url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
-      headers:
-      {
-        'Access-Control-Allow-Origin': '*'
-      },
     })
     .done((response) => {
-      // console.log(response[0]);
       const jsonData = response[0];
-      // const jsonData = JSON.parse(response.data.slice(5,response.data.length-2));
       this.setState({
         market: jsonData.e,
         currentPrice: jsonData.l_fix,
@@ -50,7 +34,6 @@ class StockMarket extends Component {
         lastChange: jsonData.c
       })
       this.stockSymbol.value = null;
-      console.log(jsonData);
     })
   }
 

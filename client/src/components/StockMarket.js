@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../stylesheets/StockMarket.css';
-// import axios from 'axios';
-import $ from 'jquery';
+import axios from 'axios';
+// import $ from 'jquery';
 
 class StockMarket extends Component {
 
@@ -23,11 +23,20 @@ class StockMarket extends Component {
       //   {
       //     'Access-Control-Allow-Origin': '*'
       //   },
-    $.ajax({
-      type: 'GET',
-      dataType: 'JSONP',
-      crossDomain: true,
+    //   $.ajax({
+    //   type: 'GET',
+    //   dataType: 'JSONP',
+    //   crossDomain: true,
+    //   url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
+    // })
+
+    axios({
+      method: 'get',
       url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
+      headers:
+      {
+        'Access-Control-Allow-Origin': '*'
+      },
     })
     .done((response) => {
       // console.log(response[0]);

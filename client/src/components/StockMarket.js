@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../stylesheets/StockMarket.css';
 import axios from 'axios';
+import $ from 'jquery';
 
 class StockMarket extends Component {
 
@@ -19,15 +20,16 @@ class StockMarket extends Component {
   getStockData() {
     // http://finance.google.com/finance/info?client=ig&q=AAPL
     // axios.get(`http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`)
-    axios({
-      method: 'get',
-      headers:
-        {
-          "Access-Control-Allow-Origin": "*"
-        },
+    $.ajax({
       url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
+      type: 'GET',
+      crossDomain: true,
+      dataType: 'jsonp',
+      success: function() { alert("Success"); },
+      error: function() { alert('Failed!'); },
+      beforeSend: setHeader
     })
-    .then((response) => {
+    .done((response) => {
       const jsonData = JSON.parse(response.data.slice(5,response.data.length-2));
       this.setState({
         market: jsonData.e,

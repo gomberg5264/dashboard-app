@@ -81,7 +81,7 @@ class Login extends Component {
         password: password
       })
       .then((response) => {
-        alertify.log('Login Successful!');
+        alertify.success('Login Successful!');
         this.setState({
           loginOrLogout: 'Logout'
         })
@@ -98,7 +98,7 @@ class Login extends Component {
   logout() {
     axios.get('/auth/logout')
     .then((response) => {
-      alertify.log('Logout Successful!');
+      alertify.success('Logout Successful!');
       alertify.alert("Please Refresh Page");
       this.setState({
         loginOrLogout: 'Login'
@@ -136,7 +136,7 @@ class Login extends Component {
         email: this.register_email.value
     })
     .then((response) => {
-      alertify.log('Registration Successful!');
+      alertify.success('Registration Successful!');
       this.hideModalRegistration();
       this.loginLogout();
     })

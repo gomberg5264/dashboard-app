@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { Button, Input, Modal, ButtonToolbar, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
+import { Button, Input, ButtonToolbar, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
 import axios from 'axios';
 import './stylesheets/App.css';
 import About from './components/About';

@@ -11,9 +11,9 @@
 }
 
 .add_button {
-  background-color: black;
+  border: 1px solid white;
 }
 
 .inputClass {
-  color: black;
+  /*color: black;*/
 }

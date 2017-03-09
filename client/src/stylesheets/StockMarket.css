@@ -9,12 +9,24 @@
   font-family: 'Federo', sans-serif;
 }
 
-.input_button {
-  background-color: black;
+.add_button {
+  /*background-color: black;*/
+  background-color: rgba(1,1,1,0.2);
+  height: 33px;
+}
+
+.add_button:hover {
+  background-color: rgba(1,1,1,0.3);
 }
 
 .inputClass {
-  color: black;
+  color: white;
+  background-color: rgba(1,1,1,0.1);
+  padding: 5px;
+}
+
+.inputClass::placeholder {
+  color: white;
 }
 
 .stockDesc {

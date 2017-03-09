@@ -112,7 +112,7 @@ class Todo extends Component {
         <input
           className="inputClass"
           type="text"
-          placeholder="Add Todo Item"
+          placeholder="Enter Todo Item"
           ref={(input) => { this.todoItem = input; }}
         />
         &nbsp;

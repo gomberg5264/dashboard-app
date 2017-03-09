@@ -58,12 +58,12 @@ class StockMarket extends Component {
         <input
           className="inputClass"
           type="text"
-          placeholder="Enter a Ticker Symbol"
+          placeholder="Enter Ticker Symbol"
           ref={(input) => { this.stockSymbol = input; }}
         />
         &nbsp;
         <input
-          className="input_button"
+          className="add_button"
           type="button"
           value="Quote"
           onClick={this.getStockData}

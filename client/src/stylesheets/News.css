@@ -27,6 +27,7 @@ a:hover {
   /*border-radius: 8%;*/
   background-color: rgba(1,1,1,0.2);
   margin: 10px;
+  height: 88px;
 }
 
 .one_article:hover {
@@ -34,11 +35,13 @@ a:hover {
 }
 
 img {
-  padding: 10px 5px;
+  position: relative;
+  margin: 10px 5px;
+  border: 1px solid white;
 }
 
 h4 {
-  margin-top: 16px;
+  margin-top: 17px;
 }
 
 .updated {

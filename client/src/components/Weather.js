@@ -90,9 +90,9 @@ class Weather extends Component {
         <ul>
         </ul>
         <input
-          className="input_class"
+          className="inputClass"
           type="text"
-          placeholder="Enter a zipcode"
+          placeholder="Enter Zipcode"
           ref={(input) => { this.zipCode = input; }}
         />
         &nbsp;

@@ -28,7 +28,7 @@ class News extends Component {
         this.state.articles.map((article) => (
           <div className="one_article">
             <a href={article.url} target="_blank">
-              <img className="pull-left" src={article.urlToImage} height="70px" width="100px"/>
+              <img className="pull-left" src={article.urlToImage} height="65px" width="100px"/>
               <h4 className="header">{article.title}</h4>
             </a>
             <br />
@@ -36,9 +36,6 @@ class News extends Component {
           )
         )
       )
-      // this.state.articles.map((el) => {
-      //   console.log(el);
-      // })
     }
   }
 

@@ -10,6 +10,14 @@
   font-family: 'Federo', sans-serif;
 }
 
+.main_News::-webkit-scrollbar {
+  width: 0.7em;
+}
+
+.main_News::-webkit-scrollbar-thumb {
+  background-color: rgba(1,1,1,0.5);
+}
+
 a:link {
   text-decoration: none;
 }
@@ -20,6 +28,11 @@ a {
 
 a:hover {
   color: white;
+}
+
+a:visited {
+  color: white;
+  background-color: green;
 }
 
 .one_article {
@@ -57,3 +70,17 @@ h4 {
   margin-right: 5px;
   margin-bottom: 10px;
 }
+
+.moreInfoBtn {
+  font-size: 24px;
+}
+
+.moreInfoBtn:hover {
+  cursor: pointer;
+}
+
+.aboutNewsWidget {
+  /*background-color: rgba(1,1,1,0.1);*/
+  opacity: 0.1;
+}
+

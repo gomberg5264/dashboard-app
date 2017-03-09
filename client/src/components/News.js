@@ -4,6 +4,7 @@ import axios from 'axios';
 import apiKeys from '../config.js';
 import the_next_web_logo from '../images/the_next_web_logo.png';
 import moment from 'moment';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
 
 class News extends Component {
   constructor() {
@@ -13,6 +14,7 @@ class News extends Component {
     }
     this.showLatestNews = this.showLatestNews.bind(this);
     this.timeConvert = this.timeConvert.bind(this);
+    this.moreInfo = this.moreInfo.bind(this);
   }
 
   componentDidMount() {
@@ -52,10 +54,27 @@ class News extends Component {
     }
   }
 
+  moreInfo() {
+    return (
+      <Popover className="aboutNewsWidget" title="About 'Top Tech News'">
+        <p>
+          This widget gives you the top 10 latest tech news. You can click on
+          a title that you like, and it will take you to news page, where you
+          can read the full news. It refreshes automatically several times a
+          day - so your news is assured to be the latest all the time.
+        </p>
+      </Popover>
+    );
+  }
+
   render() {
     return (
       <div className="main_News">
         <h2>
+        <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+          <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+        </OverlayTrigger>
+          &nbsp;
           Top Tech News
           <span className="pull-right poweredBy">
             Powered By:&nbsp;

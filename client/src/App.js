@@ -16,45 +16,42 @@ import Login from './components/Login';
 class App extends Component {
    render() {
     return (
-      <BrowserRouter>
-        <div className="main_App">
-          <Grid>
-            <Row className="show-grid">
-              <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
-               <Login  />
-              </Col>
-            </Row>
-            <Row className="show-grid">
-              <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
-                <PopularLinks />
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={6} className="oneColumn">
-                <News />
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
-                <Todo />
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
-                <Postit />
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
-                <Weather  />
-              </Col>
-              <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
-                <StockMarket />
-              </Col>
-            </Row>
-          </Grid>
-          <div>
-            {/* <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/about" component={About} />
-              <Route component={NotFound} />
-            </Switch>
+      <div className="main_App">
+        <Grid fluid>
+          {/*
+          <Row className="show-grid">
+            <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
+             <Login  />
+            </Col>
+          </Row>
           */}
-          </div>
-        </div>
-      </BrowserRouter>
+          <Row className="show-grid">
+            <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
+              What is your main focus for today?
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            <Col xs={12} sm={12} md={6} lg={5} className="oneColumn">
+              <News />
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={2} className="oneColumn">
+              <PopularLinks />
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={5} className="oneColumn">
+              <Todo />
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
+              <Postit />
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
+              <Weather  />
+            </Col>
+            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
+              <StockMarket />
+            </Col>
+          </Row>
+        </Grid>
+      </div>
     );
   }
 }

@@ -20,6 +20,7 @@
 
 .inputClass {
   /*color: black;*/
+  width: 190px;
 }
 
 .add_button {
@@ -106,3 +107,7 @@ ul > h3, .iconClass, .currentTemp {
 .details {
   margin-top: 2rem;
 }
+
+
+
+

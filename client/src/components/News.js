@@ -28,6 +28,8 @@ class News extends Component {
   }
 
   timeConvert (time) {
+    // convert time from utc to user's local time
+    // and make it easily human readible
     time = time.replace("T", ' ');
     time = time.replace("Z", ' ');
     var date = new Date(`${time} UTC`);
@@ -58,10 +60,12 @@ class News extends Component {
     return (
       <Popover className="aboutNewsWidget" title="About 'Top Tech News'">
         <p>
-          This widget gives you the top 10 latest tech news. You can click on
-          a title that you like, and it will take you to news page, where you
-          can read the full news. It refreshes automatically several times a
-          day - so your news is assured to be the latest all the time.
+          This widget gives you the top 10 latest tech news. You can click on a
+          title that you like, and it will take you to the news page, where you can
+          read the full news. It refreshes automatically several times a day.
+        </p>
+        <p>
+          Scroll down with your mouse to view the rest of the news feed.
         </p>
       </Popover>
     );

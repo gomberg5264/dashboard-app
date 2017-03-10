@@ -85,23 +85,22 @@ class Weather extends Component {
   render() {
     return (
       <div className="main_Weather text-center">
-        <h2>Weather</h2>
-        <hr />
-        <ul>
-        </ul>
-        <input
-          className="inputClass"
-          type="text"
-          placeholder="Enter Zipcode"
-          ref={(input) => { this.zipCode = input; }}
-        />
-        &nbsp;
-        <input
-          className="add_button"
-          type="button"
-          value="Enter"
-          onClick={this.addZipcode}
-        />
+        <h2 className="pull-left">Weather</h2>
+        <span className="pull-right">
+          <input
+            className="inputClass"
+            type="text"
+            placeholder="Enter Zipcode and Press Enter"
+            ref={(input) => { this.zipCode = input; }}
+          />
+          &nbsp;
+          <input
+            className="add_button"
+            type="button"
+            value="Enter"
+            onClick={this.addZipcode}
+          />
+        </span>
         <br />
         {this.weatherInfo()}
     </div>

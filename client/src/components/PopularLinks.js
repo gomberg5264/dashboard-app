@@ -43,6 +43,10 @@ class PopularLinks extends Component {
     return (
       <div className="main_PopularLinks text-center">
         <h2>Daily Apps</h2>
+        <a href="https://www.facebook.com/" target="_top">Facebook</a>
+        <div className="box">
+          <iframe src="https://www.facebook.com/" target="_top" width = "500px" height = "500px"></iframe>
+        </div>
         <hr />
         <ul>
           {this.showList()}

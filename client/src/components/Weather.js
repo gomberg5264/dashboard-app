@@ -3,6 +3,7 @@ import '../stylesheets/Weather.css';
 import axios from 'axios';
 import {Button, Glyphicon} from 'react-bootstrap';
 import apiKeys from '../config.js';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
 
 class Weather extends Component {
   constructor() {
@@ -20,6 +21,7 @@ class Weather extends Component {
     this.addZipcode = this.addZipcode.bind(this);
     this.kelvinToFarenheit = this.kelvinToFarenheit.bind(this);
     this.weatherInfo = this.weatherInfo.bind(this);
+    this.moreInfo = this.moreInfo.bind(this);
   }
 
   componentDidMount() {
@@ -105,10 +107,30 @@ class Weather extends Component {
     }
   }
 
+ moreInfo() {
+    return (
+      <Popover className="aboutNewsWidget" title="About 'Top Tech News'">
+        <p>
+          This widget gives you the top 10 latest tech news. You can click on a
+          title that you like, and it will take you to the news page, where you can
+          read the full news. It refreshes automatically several times a day.
+        </p>
+        <p>
+          Scroll down with your mouse to view the rest of the news feed.
+        </p>
+      </Popover>
+    );
+  }
+
   render() {
     return (
       <div className="main_Weather text-center">
-        <h2 className="pull-left">Weather</h2>
+        <h2 className="pull-left">
+          <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+            <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+          </OverlayTrigger>
+          &nbsp;
+          Weather</h2>
         <span className="pull-right">
           <input
             className="weather-input text-center"

@@ -79,7 +79,7 @@ class Postit extends Component {
   render() {
     return (
       <div className="main_Postit text-center">
-        <h2>Quick Note!</h2>
+        <h2>Quick Note! -> Todo</h2>
         <hr />
         <ul>
           {this.showNote()}

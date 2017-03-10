@@ -18,9 +18,21 @@
   font-size: 20px;
 }
 
-.inputClass {
+.weather-input {
   /*color: black;*/
   width: 220px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+
+.weather-input:focus {
+  background: transparent;
+  outline: 0 none;
 }
 
 .add_button {
@@ -102,6 +114,7 @@ ul > h3, .iconClass, .currentTemp {
 
 .iconClass {
   margin-left: 0;
+  padding: 30px;
 }
 
 .details {

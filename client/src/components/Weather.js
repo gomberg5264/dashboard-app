@@ -23,7 +23,28 @@ class Weather extends Component {
   }
 
   componentDidMount() {
-
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=10013&key=${apiKeys.googleMapsAPI}`)
+    .then((response) => {
+      var lng = response.data.results[0].geometry.location.lng;
+      var lat = response.data.results[0].geometry.location.lat;
+      var city = response.data.results[0].address_components[1].long_name;
+      axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=10013,us&appid=${apiKeys.openWeatherAPI}`)
+      .then((res) => {
+        this.setState({
+          currentCity: city,
+          currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
+          currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
+          currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
+          currentSummary: res.data.list[0].weather[0].description,
+          currentTime: res.data.list[0].dt,
+          currentHumidity: res.data.list[0].main.humidity
+        })
+        // console.log(this.state);
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
   }
 
   kelvinToFarenheit(kelvin) {
@@ -66,7 +87,6 @@ class Weather extends Component {
           iconClass = weatherIcons[idx];
         }
       })
-
       return (
         <ul>
           <div className={iconClass + " iconClass"} />
@@ -88,9 +108,9 @@ class Weather extends Component {
         <h2 className="pull-left">Weather</h2>
         <span className="pull-right">
           <input
-            className="inputClass"
+            className="weather-input text-center"
             type="text"
-            placeholder="Enter your Zipcode and Press Enter"
+            placeholder="Enter Your Zipcode And Press Enter"
             ref={(input) => { this.zipCode = input; }}
           />
           &nbsp;

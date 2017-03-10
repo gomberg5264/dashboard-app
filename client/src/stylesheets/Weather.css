@@ -15,15 +15,16 @@
   display: inline;
   margin-left: 4rem;
   margin-right: 4rem;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .weather-input {
   /*color: black;*/
-  width: 220px;
+  width: 280px;
   background: transparent;
   border: none;
   border-bottom: 2px solid white;
+  font-size: 18px;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -119,8 +120,10 @@ ul > h3, .iconClass, .currentTemp {
 
 .details {
   margin-top: 2rem;
+  font-size: 20px;
 }
 
-
-
+.cityName {
+  font-size: 30px;
+}
 

@@ -52,30 +52,33 @@ class Weather extends Component {
      return (kelvin * 9/5 - 459.67).toFixed(2);
   }
 
-  addZipcode() {
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.zipCode.value}&key=${apiKeys.googleMapsAPI}`)
-    .then((response) => {
-      var lng = response.data.results[0].geometry.location.lng;
-      var lat = response.data.results[0].geometry.location.lat;
-      var city = response.data.results[0].address_components[1].long_name;
-      axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=${this.zipCode.value},us&appid=${apiKeys.openWeatherAPI}`)
-      .then((res) => {
-        this.zipCode.value = null;
-        this.setState({
-          currentCity: city,
-          currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
-          currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
-          currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
-          currentSummary: res.data.list[0].weather[0].description,
-          currentTime: res.data.list[0].dt,
-          currentHumidity: res.data.list[0].main.humidity
+  addZipcode(e) {
+    // when Enter is press from input, then exectue
+    if (e.key === 'Enter') {
+      axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.zipCode.value}&key=${apiKeys.googleMapsAPI}`)
+      .then((response) => {
+        var lng = response.data.results[0].geometry.location.lng;
+        var lat = response.data.results[0].geometry.location.lat;
+        var city = response.data.results[0].address_components[1].long_name;
+        axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=${this.zipCode.value},us&appid=${apiKeys.openWeatherAPI}`)
+        .then((res) => {
+          this.zipCode.value = null;
+          this.setState({
+            currentCity: city,
+            currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
+            currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
+            currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
+            currentSummary: res.data.list[0].weather[0].description,
+            currentTime: res.data.list[0].dt,
+            currentHumidity: res.data.list[0].main.humidity
+          })
+          // console.log(this.state);
         })
-        // console.log(this.state);
       })
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
   }
 
   weatherInfo() {
@@ -110,15 +113,9 @@ class Weather extends Component {
           <input
             className="weather-input text-center"
             type="text"
-            placeholder="Enter Your Zipcode And Press Enter"
+            placeholder="Enter Your Zipcode"
             ref={(input) => { this.zipCode = input; }}
-          />
-          &nbsp;
-          <input
-            className="add_button"
-            type="button"
-            value="Enter"
-            onClick={this.addZipcode}
+            onKeyPress={this.addZipcode}
           />
         </span>
         <br />

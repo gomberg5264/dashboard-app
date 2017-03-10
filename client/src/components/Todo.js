@@ -107,7 +107,7 @@ class Todo extends Component {
   render() {
     return (
       <div className="main_Todo text-center">
-        <h2>Todos</h2>
+        <h2>Music</h2>
         <hr />
         <input
           className="inputClass"

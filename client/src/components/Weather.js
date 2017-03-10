@@ -90,7 +90,7 @@ class Weather extends Component {
           <input
             className="inputClass"
             type="text"
-            placeholder="Enter Zipcode and Press Enter"
+            placeholder="Enter your Zipcode and Press Enter"
             ref={(input) => { this.zipCode = input; }}
           />
           &nbsp;

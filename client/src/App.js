@@ -26,8 +26,11 @@ class App extends Component {
           </Row>
           */}
           <Row className="show-grid">
-            <Col xs={12} sm={12} md={6} lg={3} className="oneColumn">
-              What is your main focus for today?
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <div className="text-center main-focus">What is your main focus for today?
+              &nbsp;
+              <input className="main-focus-input" />
+              </div>
             </Col>
           </Row>
           <Row className="show-grid">

@@ -109,14 +109,14 @@ class Weather extends Component {
 
  moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Top Tech News'">
+      <Popover className="aboutNewsWidget" title="About 'Weather'">
         <p>
-          This widget gives you the top 10 latest tech news. You can click on a
-          title that you like, and it will take you to the news page, where you can
-          read the full news. It refreshes automatically several times a day.
+          This widget gives you the current weather and short summary.
+          You can just enter your zipcode and press Enter to get the
+          weather condition of your city.
         </p>
         <p>
-          Scroll down with your mouse to view the rest of the news feed.
+          This widget is powered by Open Weather API.
         </p>
       </Popover>
     );

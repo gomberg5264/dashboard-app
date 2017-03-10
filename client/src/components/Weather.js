@@ -112,8 +112,7 @@ class Weather extends Component {
       <Popover className="aboutNewsWidget" title="About 'Weather'">
         <p>
           This widget gives you the current weather and short summary.
-          You can just enter your zipcode and press Enter to get the
-          weather condition of your city.
+          You can just enter your zipcode and press Enter.
         </p>
         <p>
           This widget is powered by Open Weather API.

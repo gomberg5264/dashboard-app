@@ -16,6 +16,26 @@ class StockMarket extends Component {
     }
   }
 
+  componentDidMount() {
+    $.ajax({
+      type: 'GET',
+      dataType: 'JSONP',
+      crossDomain: true,
+      url: `http://finance.google.com/finance/info?client=ig&q=.INX`,
+    })
+    .done((response) => {
+      const jsonData = response[0];
+      this.setState({
+        market: jsonData.e,
+        currentPrice: jsonData.l_fix,
+        tickerSymbol: jsonData.t,
+        lastUpdate: jsonData.lt,
+        lastChange: jsonData.c
+      })
+      this.stockSymbol.value = null;
+    })
+  }
+
   // making cross origin browser request using jquery: crossDomain: true
   getStockData() {
     $.ajax({

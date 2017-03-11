@@ -31,3 +31,7 @@
   margin: 0;
   border: 0;
 }
+
+#authorize-button, #signout-button {
+  display: none;
+}

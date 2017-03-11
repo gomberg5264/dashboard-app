@@ -235,6 +235,40 @@ class Todo extends Component {
             });
           }
 
+          {/*
+           * Get Message with given ID.
+           *
+           * @param  {String} userId User's email address. The special value 'me'
+           * can be used to indicate the authenticated user.
+           * @param  {String} messageId ID of Message to get.
+           */}
+          var flag = false;
+          function getMessage(messageId) {
+            gapi.client.gmail.users.messages.get({
+              'userId': 'me',
+              'id': messageId,
+            }).then(function(response) {
+              if (response.result !== undefined)
+                appendPre('snippet:' + response.result.snippet);
+              if (response.result.payload.headers[14] !== undefined)
+                appendPre('sender:' + response.result.payload.headers[14].value);
+              if (response.result.payload.headers[17] !== undefined)
+                appendPre('subject:' + response.result.payload.headers[17].value);
+              if (response.result.payload.headers[15] !== undefined)
+                appendPre('time:' + response.result.payload.headers[15].value);
+              if (response.result.labelIds !== undefined)
+                appendPre('unread?:' + response.result.labelIds[0]);
+              appendPre('\n');
+              if (!flag) {
+                console.log('snippet:' + response.result.snippet);
+                console.log('sender:' + response.result.payload.headers[14].value);
+                console.log('subject:' + response.result.payload.headers[17].value);
+                console.log('time:' + response.result.payload.headers[15].value);
+                console.log('unread?:' + response.result.labelIds[0]);
+                flag = true;
+              }
+            })
+          }
 
         </script>
 

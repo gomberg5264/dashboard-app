@@ -18,6 +18,7 @@ class News extends Component {
   }
 
   componentDidMount() {
+    // axios.get(`https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=84c64f8b7b9b43a39644758899bb99b6`)
     axios.get(`https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=${apiKeys.newsAPI}`)
     .then((res) => {
       this.setState({

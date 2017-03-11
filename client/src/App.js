@@ -42,10 +42,10 @@ class App extends Component {
               <PopularLinks />
             </Col>
             <Col xs={12} sm={12} md={6} lg={5} className="oneColumn">
-              <Todo />
+              <Postit />
             </Col>
             <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
-              <Postit />
+              <Todo />
             </Col>
             <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
               <Weather  />

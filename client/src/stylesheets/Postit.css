@@ -2,7 +2,7 @@
   border: 1px solid black;
   background-color: rgba(1,1,1,0.1);
   padding: 5px;
-  height: 28rem;
+  height: 40rem;
   box-shadow: 0 4px 8px 0 white, 0 3px 10px 0 white;
   /*border-radius: 8%;*/
   color: white;
@@ -10,23 +10,24 @@
   overflow: scroll;
 }
 
-textarea {
-  color: black;
-}
-
 .add_button {
   /*background-color: black;*/
 }
 
-.one_note {
+.login-gmail {
+  background-color: rgba(1,1,1,0.2);
+  height: 34px;
+  width: 100px;
   border: 1px solid white;
-  width: 90%;
-  margin: 0 auto;
-  height: 9rem;
-  overflow: scroll;
-  margin-bottom: 0.2rem;
+  line-height: 2;
 }
 
-.deleteIcon {
-  margin-right: 1rem;
+.login-gmail:hover {
+  background-color: rgba(1,1,1,0.3);
+}
+
+.gmail-icon {
+  display: inline;
+  margin: 0;
+  border: 0;
 }

@@ -217,6 +217,25 @@ class Todo extends Component {
             pre.appendChild(textContent);
           }
 
+          {/*
+           * Retrieve Messages in user's mailbox matching query.
+           *
+           * @param  {String} userId User's email address. The special value 'me'
+           * can be used to indicate the authenticated user.
+           * @param  {Unsigned Int} maxResults Total emails requested.
+           */}
+          function listMessages() {
+            gapi.client.gmail.users.messages.list({
+              'userId': 'me',
+              'maxResults': 30,
+            }).then(function(response) {
+              response.result.messages.map(email => {
+                getMessage(email.id);
+              })
+            });
+          }
+
+
         </script>
 
         <script async defer src="https://apis.google.com/js/api.js"

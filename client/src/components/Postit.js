@@ -6,12 +6,12 @@ import alertify from 'alertify.js';
 import gmail_icon from '../images/gmail-icon.png';
 import 'react-date-picker/index.css';
 import { DateField, Calendar } from 'react-date-picker';
+import moment from 'moment';
 
 const onChange = (dateString, { dateMoment, timestamp }) => {
   console.log(dateString)
 }
 
-let date = '2017-04-24';
 
 class Postit extends Component {
   constructor() {
@@ -22,14 +22,14 @@ class Postit extends Component {
     return (
       <div className="main_Postit">
         <h2 className="pull-left">
-          Wikipedia/Google Calendar?
+          Calendar
         </h2>
-        <span className="pull-right">
-          <i className="fa fa-wikipedia-w wikipedia-icon" aria-hidden="true"></i>
-        </span>
+        <br /><br />
         <Calendar
           className="calendar"
-
+          dateFormat="YYYY-MM-DD"
+          date={moment()}
+          onChange={onChange}
         />
     </div>
     );

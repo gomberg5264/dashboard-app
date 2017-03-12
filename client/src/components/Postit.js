@@ -8,14 +8,28 @@ import 'react-date-picker/index.css';
 import { DateField, Calendar } from 'react-date-picker';
 import moment from 'moment';
 
-const onChange = (dateString, { dateMoment, timestamp }) => {
-  console.log(dateString)
-}
-
-
 class Postit extends Component {
   constructor() {
     super();
+    this.state = {
+      today: null
+    }
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    var today = moment().format("dddd, MMMM Do YYYY");
+    this.setState({
+      today
+    })
+    // console.log(moment(new Date())._d);
+    console.log(moment().format("dddd, MMMM Do YYYY"));
+  }
+
+  onChange(dateString, { dateMoment, timestamp }){
+    this.setState({
+      today: dateString
+    })
   }
 
   render() {
@@ -29,8 +43,9 @@ class Postit extends Component {
           className="calendar"
           dateFormat="YYYY-MM-DD"
           date={moment()}
-          onChange={onChange}
+          onChange={this.onChange}
         />
+        {this.state.today}
     </div>
     );
   }

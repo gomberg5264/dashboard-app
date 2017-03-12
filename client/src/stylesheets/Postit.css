@@ -32,6 +32,6 @@
   border: 0;
 }
 
-#authorize-button, #signout-button {
+#signout-button {
   display: none;
 }

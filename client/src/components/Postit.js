@@ -4,20 +4,33 @@ import axios from 'axios';
 import {Button, Glyphicon, Popover, OverlayTrigger} from 'react-bootstrap';
 import alertify from 'alertify.js';
 import gmail_icon from '../images/gmail-icon.png';
+import 'react-date-picker/index.css';
+import { DateField, Calendar } from 'react-date-picker';
+
+const onChange = (dateString, { dateMoment, timestamp }) => {
+  console.log(dateString)
+}
+
+let date = '2017-04-24';
 
 class Postit extends Component {
+  constructor() {
+    super();
+  }
 
   render() {
     return (
-      <div className="main_Postit text-center">
+      <div className="main_Postit">
         <h2 className="pull-left">
-          Gmail
+          Wikipedia/Google Calendar?
         </h2>
         <span className="pull-right">
-          <button type="button" className="login-gmail pull-left">
-            Login&nbsp;<img className="gmail-icon pull-right" src={gmail_icon} width="30px" height="30px" />
-          </button>
+          <i className="fa fa-wikipedia-w wikipedia-icon" aria-hidden="true"></i>
         </span>
+        <Calendar
+          className="calendar"
+
+        />
     </div>
     );
   }

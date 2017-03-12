@@ -20,21 +20,11 @@
   /*background-color: black;*/
 }
 
-.login-gmail {
-  background-color: rgba(1,1,1,0.2);
-  height: 34px;
-  width: 100px;
-  border: 1px solid white;
-  line-height: 2;
+.wikipedia-icon {
+  font-size: 26px;
 }
 
-.login-gmail:hover {
-  background-color: rgba(1,1,1,0.3);
+.calendar {
+  color: black;
+  background: rgba(1,1,1,0.1);
 }
-
-.gmail-icon {
-  display: inline;
-  margin: 0;
-  border: 0;
-}
-

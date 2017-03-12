@@ -67,7 +67,6 @@ app.use('/weather', weatherRoutes);
 app.use('/postit', postitRoutes);
 app.use('/stockMarket', stockMarketRoutes);
 
-// Always return the main index.html, so react-router can render the route in the client
 app.get('/api', (req, res) => {
   res.json({ message: 'hello world' });
 });
@@ -78,6 +77,7 @@ app.get('/user', (req, res) => {
 });
 
 // every other route goes here
+// Always return the main index.html
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 });

@@ -22,20 +22,22 @@ class Postit extends Component {
   }
 
   componentDidMount() {
+    // select today
     var selectedDay = moment().format("dddd, MMMM Do YYYY");
-    if (this.notes.length < 1) {
-      var notes = [];
-      notes.push('No Events Added Yet!')
-      this.setState({
-        selectedDay,
-        notes
-      })
+    // pull the data/events for that day from localStorage and update notes state
+    var notes = localStorage.getItem(selectedDay);
+    // change string value to array
+    if (notes){
+      notes = notes.split(',');
     }
     else {
-      this.setState({
-        selectedDay
-      })
+      notes = [];
+      notes.push('No Events Added Yet!');
     }
+    this.setState({
+      selectedDay,
+      notes
+    })
   }
 
   onChange(dateString){
@@ -45,6 +47,10 @@ class Postit extends Component {
     // change string value to array
     if (notes){
       notes = notes.split(',');
+    }
+    else {
+      notes = [];
+      notes.push('No Events Added Yet!');
     }
 
     this.setState({
@@ -116,7 +122,7 @@ class Postit extends Component {
       return (
         this.state.notes.map((note, idx) => (
           <li className="each-note">{note}
-            <i className="fa fa-times-circle-o pull-right"
+            <i className="fa fa-times-circle-o pull-left deleteIcon"
                aria-hidden="true"
                onClick={() => {this.deleteEvent(idx,note)}}
                >

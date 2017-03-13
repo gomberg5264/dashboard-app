@@ -45,6 +45,7 @@
   background: rgba(1,1,1,0.3);
   margin-bottom: 5px;
   margin-right: 7px;
+  overflow: scroll;
 }
 
 .all-notes {
@@ -71,3 +72,6 @@
   margin-top: 10px;
 }
 
+.deleteIcon {
+  margin-right: 5px;
+}

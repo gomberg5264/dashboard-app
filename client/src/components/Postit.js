@@ -12,49 +12,64 @@ class Postit extends Component {
   constructor() {
     super();
     this.state = {
-      today: null,
+      selectedDay: null,
       notes: []
     }
     this.onChange = this.onChange.bind(this);
     this.save = this.save.bind(this);
     this.moreInfo = this.moreInfo.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   componentDidMount() {
-    var today = moment().format("dddd, MMMM Do YYYY");
+    var selectedDay = moment().format("dddd, MMMM Do YYYY");
     if (this.notes.length < 1) {
       var notes = [];
       notes.push('No Events Added Yet!')
       this.setState({
-        today,
+        selectedDay,
         notes
       })
     }
     else {
       this.setState({
-        today
+        selectedDay
       })
     }
   }
 
-  onChange(dateString, { dateMoment, timestamp }){
+  onChange(dateString){
+    var selectedDay = moment(dateString, 'YYYY-MM-DD').format("dddd, MMMM Do YYYY");
+    // pull the data/events for that day from localStorage and update notes state
+    var notes = localStorage.getItem(selectedDay);
+    // change string value to array
+    if (notes){
+      notes = notes.split(',');
+    }
+
     this.setState({
-      today: dateString
+      selectedDay,
+      notes
     })
   }
 
   save(e) {
     if (e.key === 'Enter') {
       if (this.state.notes[0] === 'No Events Added Yet!') {
-        var temp = [];
-        temp.push(this.note.value);
+        var note = [];
+        note.push(this.note.value);
+        // save the note in localstorage
+        localStorage.setItem(this.state.selectedDay, note);
         this.setState({
-          notes: temp
+          notes: note
         })
       }
       else {
+        // add the new note to the current notes
         var notes = this.state.notes;
         notes.push(this.note.value);
+        // save/updates the notes in the localstorage
+        localStorage.setItem(this.state.selectedDay, notes.join());
         this.setState({
           notes
         })
@@ -77,19 +92,45 @@ class Postit extends Component {
     );
   }
 
+  deleteEvent(idxToDelete, noteToDelete) {
+    var notes = this.state.notes;
+    // delete that item from the array
+    notes.splice(idxToDelete,1);
+
+    // update the state with new notes array
+    this.setState({
+      notes
+    })
+
+    // update the localStorage
+    notes = notes.join(',');
+    localStorage.setItem(this.state.selectedDay, notes);
+
+    //alert the successful delete of item
+    alertify.logPosition("top left");
+    alertify.log('Calendar: \'' + noteToDelete + '\' deleted!');
+  }
+
   notes() {
-    return (
-      this.state.notes.map(note => (
-        <li className="each-note">{note}</li>
-      ))
-    )
+    if (this.state.notes) {
+      return (
+        this.state.notes.map((note, idx) => (
+          <li className="each-note">{note}
+            <i className="fa fa-times-circle-o pull-right"
+               aria-hidden="true"
+               onClick={() => {this.deleteEvent(idx,note)}}
+               >
+            </i>
+          </li>
+        ))
+      )
+    }
   }
 
   render() {
     return (
       <div className="main_Postit text-center">
           <h2 className="pull-left">
-
             &nbsp;
             <i className="fa fa-calendar" aria-hidden="true"></i>
             &nbsp;
@@ -114,7 +155,7 @@ class Postit extends Component {
               date={moment()}
               onChange={this.onChange}
             />
-          <h4 className="today">{this.state.today}</h4>
+          <h4 className="selectedDay">{this.state.selectedDay}</h4>
           <ul className="all-notes pull-right">
             {this.notes()}
           </ul>

@@ -80,20 +80,23 @@ class Postit extends Component {
           notes
         })
       }
+      // alert new item added!
+      alertify.logPosition('top left');
+      alertify.log('Calendar: \'' + this.note.value + '\' added!');
       this.note.value = null;
     }
   }
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Weather'">
+      <Popover className="aboutNewsWidget" title="About 'Calendar'">
         <p>
-          This widget gives you the current weather and short summary.
-          You can just enter your zipcode and press Enter.
+          This widget lets you the add/delete events to each day.
         </p>
-        <p>
-          This widget is powered by Open Weather API.
-        </p>
+        <ul>
+          <li>Add Event: Click on a date, enter event on top ('Enter Your Events'), and press 'Enter'.</li><br/>
+          <li>Delete Event: Click the 'x' to the left of the event.</li>
+        </ul>
       </Popover>
     );
   }

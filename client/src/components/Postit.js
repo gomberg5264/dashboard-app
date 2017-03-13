@@ -91,7 +91,7 @@ class Postit extends Component {
     return (
       <Popover className="aboutNewsWidget" title="About 'Calendar'">
         <p>
-          This widget lets you the add/delete events to each day.
+          This widget lets you add/delete events to each day.
         </p>
         <ul>
           <li>Add Event: Click on a date, enter event on top ('Enter Your Events'), and press 'Enter'.</li><br/>

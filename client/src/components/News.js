@@ -44,7 +44,7 @@ class News extends Component {
         this.state.articles.map((article) => (
           <div className="one_article">
             <a href={article.url} target="_blank">
-              <img className="pull-left" src={article.urlToImage} height="83px" width="100px"/>
+              <img className="pull-left news-image" src={article.urlToImage} height="83px" width="100px"/>
               <h4 className="header">{article.title}</h4>
             </a>
             <span className="pull-left">By {article.author}</span>
@@ -59,15 +59,17 @@ class News extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Top Tech News'">
+      <Popover className="aboutNewsWidget" title="About 'Tech News'">
         <p>
-          This widget gives you the top 10 latest tech news. You can click on a
-          title that you like, and it will take you to the news page, where you can
-          read the full news. It refreshes automatically several times a day.
+          This widget gives you the top 10 tech news updated several times a day.
         </p>
-        <p>
-          Scroll down with your mouse to view the rest of the news feed.
-        </p>
+        <ul>
+          <li>View More: Scroll down with your mouse/trackpad to view the rest of the news feed.
+          </li><br />
+          <li>Read Full News: Click on the news title you like, it'll open a new tab
+            that has full news.
+          </li>
+        </ul>
       </Popover>
     );
   }

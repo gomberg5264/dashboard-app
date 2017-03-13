@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import '../stylesheets/StockMarket.css';
 import $ from 'jquery';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
 
 class StockMarket extends Component {
 
   constructor() {
     super();
-    this.getStockData = this.getStockData.bind(this);
-    this.showData = this.showData.bind(this);
     this.state = {
       market: null,
       currentPrice: null,
       tickerSymbol: null,
       lastUpdate: null
     }
+    this.getStockData = this.getStockData.bind(this);
+    this.showData = this.showData.bind(this);
+    this.moreInfo = this.moreInfo.bind(this);
   }
 
   componentDidMount() {
@@ -37,24 +39,26 @@ class StockMarket extends Component {
   }
 
   // making cross origin browser request using jquery: crossDomain: true
-  getStockData() {
-    $.ajax({
-      type: 'GET',
-      dataType: 'JSONP',
-      crossDomain: true,
-      url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
-    })
-    .done((response) => {
-      const jsonData = response[0];
-      this.setState({
-        market: jsonData.e,
-        currentPrice: jsonData.l_fix,
-        tickerSymbol: jsonData.t,
-        lastUpdate: jsonData.lt,
-        lastChange: jsonData.c
+  getStockData(e) {
+    if (e.key === 'Enter') {
+      $.ajax({
+        type: 'GET',
+        dataType: 'JSONP',
+        crossDomain: true,
+        url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
       })
-      this.stockSymbol.value = null;
-    })
+      .done((response) => {
+        const jsonData = response[0];
+        this.setState({
+          market: jsonData.e,
+          currentPrice: jsonData.l_fix,
+          tickerSymbol: jsonData.t,
+          lastUpdate: jsonData.lt,
+          lastChange: jsonData.c
+        })
+        this.stockSymbol.value = null;
+      })
+    }
   }
 
   showData() {
@@ -70,25 +74,41 @@ class StockMarket extends Component {
     }
   }
 
+  moreInfo() {
+    return (
+      <Popover className="aboutNewsWidget" title="About 'Calendar'">
+        <p>
+          This widget lets you add/delete events to each day.
+        </p>
+        <ul>
+          <li>Add Event: Click on a date, enter event on top ('Enter Your Events'), and press 'Enter'.</li><br/>
+          <li>Delete Event: Click the 'x' to the left of the event.</li>
+        </ul>
+      </Popover>
+    );
+  }
+
   render() {
     return (
       <div className="main_StockMarket text-center">
-        <h2>Stock Market</h2>
-        <hr />
-        <input
-          className="inputClass"
-          type="text"
-          placeholder="Enter Ticker Symbol"
-          ref={(input) => { this.stockSymbol = input; }}
-        />
-        &nbsp;
-        <input
-          className="add_button"
-          type="button"
-          value="Quote"
-          onClick={this.getStockData}
-        />
-
+         <h2 className="pull-left">
+            &nbsp;
+            <i className="fa fa-university" aria-hidden="true"></i>
+            &nbsp;
+            StockMarket
+          </h2>
+          <span className="pull-right">
+            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+              <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+            </OverlayTrigger>
+          </span>
+            <input
+              className="stock-market-input text-center"
+              type="text"
+              placeholder="Enter Stock Symbol"
+              ref={(input) => { this.stockSymbol = input; }}
+              onKeyPress={this.getStockData}
+            />
         {this.showData()}
       </div>
     );

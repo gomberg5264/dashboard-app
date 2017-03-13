@@ -153,7 +153,7 @@ class Postit extends Component {
             <input
               className="postit-input text-center"
               type="text"
-              placeholder="Enter Your Events"
+              placeholder="Enter Your Event"
               ref={(input) => { this.note = input; }}
               onKeyPress={this.save}
             />

@@ -3,7 +3,13 @@
   background-color: rgba(1,1,1,0.1);
   padding: 5px;
   height: 28rem;
-  box-shadow: 0 4px 8px 0 white, 0 3px 10px 0 white;
+  /*box-shadow: 0 4px 8px 0 white, 0 3px 10px 0 white;*/
+  box-shadow:   1px 1px 0px  black,
+                2px 2px 0px  black,
+                3px 3px 0px  black,
+                4px 4px 0px  black,
+                5px 5px 0px  black,
+                6px 6px 0px  black;
   /*border-radius: 8%;*/
   color: white;
   font-family: 'Federo', sans-serif;
@@ -44,4 +50,22 @@ h2 {
 
 hr {
   margin: 0.7rem;
+}
+
+.stock-market-input {
+  /*color: black;*/
+  width: 180px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  font-size: 18px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+
+.stock-market-input:focus {
+  background: transparent;
+  outline: 0 none;
 }

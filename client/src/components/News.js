@@ -44,7 +44,7 @@ class News extends Component {
         this.state.articles.map((article) => (
           <div className="one_article">
             <a href={article.url} target="_blank">
-              <img className="pull-left" src={article.urlToImage} height="80px" width="100px"/>
+              <img className="pull-left" src={article.urlToImage} height="83px" width="100px"/>
               <h4 className="header">{article.title}</h4>
             </a>
             <span className="pull-left">By {article.author}</span>

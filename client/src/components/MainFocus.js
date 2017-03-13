@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../stylesheets/MainFocus.css';
+import alertify from 'alertify.js';
 
 class MainFocus extends Component {
   constructor() {
@@ -22,6 +23,8 @@ class MainFocus extends Component {
   save(e) {
     if (e.key === 'Enter') {
       localStorage.setItem('main-focus', this.mainFocus.value )
+      alertify.logPosition("top left");
+      alertify.log('Main Focus: ' + this.mainFocus.value + ' added!');
       this.mainFocus.value = null;
     }
     this.componentDidMount();
@@ -37,10 +40,10 @@ class MainFocus extends Component {
           <input className="main-focus-input text-center"
             type="text"
             placeholder="Type Here"
-            value={this.state.mainFocus}
             ref={(input) => { this.mainFocus = input; }}
             onKeyPress={this.save}
           />
+          {this.state.mainFocus}
         </div>
       </div>
     );

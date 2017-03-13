@@ -13,6 +13,7 @@ import Weather from './components/Weather';
 import StockMarket from './components/StockMarket';
 import Login from './components/Login';
 import MainFocus from './components/MainFocus';
+import './stylesheets/animate.css';
 
 class App extends Component {
    render() {
@@ -27,27 +28,27 @@ class App extends Component {
           </Row>
           */}
           <Row className="show-grid">
-            <Col xs={12} sm={12} md={12} lg={12}>
+            <Col xs={12} sm={12} md={12} lg={12} className="animated bounce">
               <MainFocus />
             </Col>
           </Row>
           <Row className="show-grid">
-            <Col xs={12} sm={12} md={6} lg={5} className="oneColumn">
+            <Col xs={12} sm={12} md={6} lg={5} className="oneColumn animated rotateInDownLeft">
               <News />
             </Col>
-            <Col xs={12} sm={12} md={6} lg={2} className="oneColumn">
+            <Col xs={12} sm={12} md={6} lg={2} className="oneColumn animated bounceInDown">
               <PopularLinks />
             </Col>
-            <Col xs={12} sm={12} md={6} lg={5} className="oneColumn">
+            <Col xs={12} sm={12} md={6} lg={5} className="oneColumn animated rotateInDownRight">
               <Postit />
             </Col>
-            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
+            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn animated rotateInDownLeft">
               <Todo />
             </Col>
-            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
+            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn animated bounceInUp">
               <Weather  />
             </Col>
-            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn">
+            <Col xs={12} sm={12} md={6} lg={4} className="oneColumn animated rotateInDownRight">
               <StockMarket />
             </Col>
           </Row>

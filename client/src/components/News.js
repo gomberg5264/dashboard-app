@@ -78,7 +78,6 @@ class News extends Component {
     return (
       <div className="main_News">
         <h2>
-
           &nbsp;
           <i className="fa fa-newspaper-o" aria-hidden="true"></i>
           &nbsp;

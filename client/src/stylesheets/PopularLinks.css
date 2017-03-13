@@ -23,14 +23,12 @@ ul {
   padding: 0;
 }
 
-.box{
-    display: none;
-    width: 100%;
+.apps-header {
+  margin-right: 15px;
 }
 
-a:hover + .box,.box:hover{
-    display: block;
-    position: relative;
-    z-index: 100;
+.apps-body {
+  margin-top: 25px;
 }
+
 

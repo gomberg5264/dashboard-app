@@ -80,7 +80,7 @@ class News extends Component {
           &nbsp;
           <i className="fa fa-newspaper-o" aria-hidden="true"></i>
           &nbsp;
-          News
+          Tech News
           <span className="pull-right poweredBy">
             <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>

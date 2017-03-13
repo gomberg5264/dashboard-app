@@ -12,6 +12,7 @@ import Postit from './components/Postit';
 import Weather from './components/Weather';
 import StockMarket from './components/StockMarket';
 import Login from './components/Login';
+import MainFocus from './components/MainFocus';
 
 class App extends Component {
    render() {
@@ -27,11 +28,7 @@ class App extends Component {
           */}
           <Row className="show-grid">
             <Col xs={12} sm={12} md={12} lg={12}>
-              <div className="text-center main-focus">What is your main focus for today?
-              &nbsp;
-              <input className="main-focus-input text-center"
-                placeholder="Type Here" />
-              </div>
+              <MainFocus />
             </Col>
           </Row>
           <Row className="show-grid">

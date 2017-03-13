@@ -89,3 +89,7 @@ h4 {
   /*background-color: rgba(1,1,1,0.1);*/
   opacity: 0.1;
 }
+
+.all-news {
+  margin-top: 0;
+}

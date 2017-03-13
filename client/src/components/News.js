@@ -76,18 +76,18 @@ class News extends Component {
     return (
       <div className="main_News">
         <h2>
-        <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
-          <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
-        </OverlayTrigger>
+
           &nbsp;
-          Top Tech News
+          <i className="fa fa-newspaper-o" aria-hidden="true"></i>
+          &nbsp;
+          News
           <span className="pull-right poweredBy">
-            Powered By:&nbsp;
-            <img src={the_next_web_logo} height="30px" width="80px" alt="logo"/>
+            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+              <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+            </OverlayTrigger>
           </span>
         </h2>
-        <hr />
-        <ul>
+        <ul className="all-news">
           {this.showLatestNews()}
         </ul>
         <br />

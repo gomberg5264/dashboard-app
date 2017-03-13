@@ -13,7 +13,7 @@ class Postit extends Component {
     super();
     this.state = {
       today: null,
-      notes: [],
+      notes: []
     }
     this.onChange = this.onChange.bind(this);
     this.save = this.save.bind(this);
@@ -24,7 +24,7 @@ class Postit extends Component {
     var today = moment().format("dddd, MMMM Do YYYY");
     if (this.notes.length < 1) {
       var notes = [];
-      notes.push('No Notes Added Yet!')
+      notes.push('No Events Added Yet!')
       this.setState({
         today,
         notes
@@ -45,7 +45,7 @@ class Postit extends Component {
 
   save(e) {
     if (e.key === 'Enter') {
-      if (this.state.notes[0] === 'No Notes Added Yet!') {
+      if (this.state.notes[0] === 'No Events Added Yet!') {
         var temp = [];
         temp.push(this.note.value);
         this.setState({
@@ -80,9 +80,7 @@ class Postit extends Component {
   notes() {
     return (
       this.state.notes.map(note => (
-        <ul className="all-notes">
-          <li className="each-note">{note}</li>
-        </ul>
+        <li className="each-note">{note}</li>
       ))
     )
   }
@@ -91,21 +89,24 @@ class Postit extends Component {
     return (
       <div className="main_Postit text-center">
           <h2 className="pull-left">
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
-              <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
-            </OverlayTrigger>
+
+            &nbsp;
+            <i className="fa fa-calendar" aria-hidden="true"></i>
             &nbsp;
             Calendar
           </h2>
           <span className="pull-right">
+            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+              <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+            </OverlayTrigger>
+          </span>
             <input
               className="postit-input text-center"
               type="text"
-              placeholder="Enter Your Note"
+              placeholder="Enter Your Events"
               ref={(input) => { this.note = input; }}
               onKeyPress={this.save}
             />
-          </span>
           <br /><br />
           <Calendar
               className="calendar pull-left"
@@ -114,7 +115,9 @@ class Postit extends Component {
               onChange={this.onChange}
             />
           <h4 className="today">{this.state.today}</h4>
-          {this.notes()}
+          <ul className="all-notes pull-right">
+            {this.notes()}
+          </ul>
        </div>
     );
   }

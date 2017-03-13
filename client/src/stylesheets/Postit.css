@@ -20,11 +20,6 @@
   /*background-color: black;*/
 }
 
-.calendar {
-  /*color: white;*/
-}
-
-
 .postit-input {
   /*color: black;*/
   width: 280px;
@@ -49,9 +44,17 @@
   padding: 10px;
   width: 200px;
   background: rgba(1,1,1,0.3);
+  margin-bottom: 5px;
 }
 
 .all-notes {
   display: inline-block;
   margin: 0;
 }
+
+
+.calendar {
+  margin-top: 17px;
+}
+
+

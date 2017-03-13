@@ -44,12 +44,21 @@ class Postit extends Component {
   }
 
   save(e) {
-    var notes = this.state.notes;
     if (e.key === 'Enter') {
-      notes.push(this.note.value);
-      this.setState({
-        notes
-      })
+      if (this.state.notes[0] === 'No Notes Added Yet!') {
+        var temp = [];
+        temp.push(this.note.value);
+        this.setState({
+          notes: temp
+        })
+      }
+      else {
+        var notes = this.state.notes;
+        notes.push(this.note.value);
+        this.setState({
+          notes
+        })
+      }
       this.note.value = null;
     }
   }
@@ -86,7 +95,8 @@ class Postit extends Component {
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
             </OverlayTrigger>
             &nbsp;
-            Calendar</h2>
+            Calendar
+          </h2>
           <span className="pull-right">
             <input
               className="postit-input text-center"

@@ -73,19 +73,6 @@ class StockMarket extends Component {
     }
   }
 
-  showData() {
-    if (this.state.stocks !== null) {
-        return (
-          this.state.stocks.map(stock => (
-              <li className="one-stock pull-left">
-                <div className="stockDesc">{stock.market}: {stock.tickerSymbol}</div>
-                <div className="stockPrice">$ {stock.currentPrice}</div>
-                <div>Change: {stock.lastChange}</div>
-              </li>
-          ))
-        )
-    }
-  }
 
   moreInfo() {
     return (

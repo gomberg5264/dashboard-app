@@ -39,6 +39,7 @@
 
 .stockDesc {
   font-size: 18px;
+  margin-right: 17px;
 }
 
 .stockPrice {
@@ -109,7 +110,7 @@ hr {
 }
 
 .deleteIconStock {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 

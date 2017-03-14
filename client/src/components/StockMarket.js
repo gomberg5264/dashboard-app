@@ -19,6 +19,7 @@ class StockMarket extends Component {
     this.moreInfo = this.moreInfo.bind(this);
     this.lastUpdate = this.lastUpdate.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
+    this.deleteIcon = this.deleteIcon.bind(this);
   }
 
   componentDidMount() {
@@ -128,17 +129,26 @@ class StockMarket extends Component {
 
   }
 
+  // delete icon for user added stocks: not the s&p, dow, nasdaq index
+  deleteIcon(tickerSymbol) {
+    if (tickerSymbol !== '.INX' && tickerSymbol !== '.DJI' && tickerSymbol !== '.IXIC') {
+      return (
+        <span className="deleteIconStock">
+          <i className="fa fa-times-circle-o pull-left"
+             aria-hidden="true"
+             onClick={() => {this.deleteEvent()}}
+             />
+        </span>
+      )
+    }
+  }
+
   showData() {
     if (this.state.stocks) {
       return (
         this.state.stocks.map(stock => (
           <li className={"one-stock pull-left " + stock.stockClassName} >
-            <span className="deleteIconStock">
-              <i className="fa fa-times-circle-o pull-left"
-                 aria-hidden="true"
-                 onClick={() => {this.deleteEvent()}}
-                 />
-            </span>
+            {this.deleteIcon(stock.tickerSymbol)}
             <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
               <div className="stockDesc">{stock.title}</div>
               <div className="stockPrice">$ {stock.currentPrice}</div>

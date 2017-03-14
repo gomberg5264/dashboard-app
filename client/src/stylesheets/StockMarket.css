@@ -37,11 +37,11 @@
 }
 
 .stockDesc {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .stockPrice {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 h2 {
@@ -71,11 +71,24 @@ hr {
 }
 
 .one-stock {
+  width: 132px;
+  height: 90px;
   display: inline-block;
   margin-left: 10px;
   padding: 5px;
   border: 1px solid white;
   background-color: rgba(1,1,1,0.3);
+  overflow: scroll;
 }
+
+.stockGreen {
+  background-color: rgba(0, 250, 0, 0.3);
+}
+
+.stockRed {
+  background-color: rgba(250, 0, 0, 0.3);
+}
+
+
 
 

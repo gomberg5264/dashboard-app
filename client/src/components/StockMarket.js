@@ -42,6 +42,7 @@ class StockMarket extends Component {
       .done((response) => {
         const jsonData = response[0];
         var title = jsonData.t;
+
         // add custom name for the 3 default indices
         if (stockIndex === '.INX') {
           title = 'S&P 500';
@@ -52,6 +53,8 @@ class StockMarket extends Component {
         if (stockIndex === '.IXIC') {
           title = 'NASDAQ';
         }
+
+        // an stock data object
         var stockData = {
           'index': idx,
           'market': jsonData.e,
@@ -61,13 +64,26 @@ class StockMarket extends Component {
           'lastChange': jsonData.c,
           'title': title
         };
+
+        // add custom className for the 3 default indices
+        stockData['stockClassName'] = '';
+        if (stockIndex === '.INX') {
+          stockData['stockClassName'] += ' index-average ';
+        }
+        if (stockIndex === '.DJI') {
+          stockData['stockClassName'] += ' index-average ';
+        }
+        if (stockIndex === '.IXIC') {
+          stockData['stockClassName'] += ' index-average ';
+        }
+
         // add stock class depending on last change positive or negative
         // className used for change background to red/green
         if (jsonData.c.charAt(0) === '+') {
-          stockData['stockClassName'] = 'stockGreen';
+          stockData['stockClassName'] += ' stockGreen ';
         }
         if (jsonData.c.charAt(0) === '-') {
-          stockData['stockClassName'] = 'stockRed';
+          stockData['stockClassName'] += ' stockRed ';
         }
         var stocks = this.state.stocks;
         stocks[idx] = stockData;

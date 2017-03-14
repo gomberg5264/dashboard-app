@@ -17,6 +17,7 @@ class StockMarket extends Component {
     this.getStockData = this.getStockData.bind(this);
     this.showData = this.showData.bind(this);
     this.moreInfo = this.moreInfo.bind(this);
+    this.lastUpdate = this.lastUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -79,12 +80,28 @@ class StockMarket extends Component {
       })
       .done((response) => {
         const jsonData = response[0];
+        var title = jsonData.t;
+        var stockData = {
+          'market': jsonData.e,
+          'currentPrice': jsonData.l_fix,
+          'tickerSymbol': jsonData.t,
+          'lastUpdate': jsonData.lt,
+          'lastChange': jsonData.c,
+          'title': title
+        };
+        // className used for change background to red/green
+        if (jsonData.c.charAt(0) === '+') {
+          stockData['stockClassName'] = 'stockGreen';
+        }
+        if (jsonData.c.charAt(0) === '-') {
+          stockData['stockClassName'] = 'stockRed';
+        }
+
+        // update the state with new stock
+        var stocks = this.state.stocks;
+        stocks.push(stockData);
         this.setState({
-          market: jsonData.e,
-          currentPrice: jsonData.l_fix,
-          tickerSymbol: jsonData.t,
-          lastUpdate: jsonData.lt,
-          lastChange: jsonData.c
+          stocks
         })
         this.stockSymbol.value = null;
       })
@@ -95,14 +112,35 @@ class StockMarket extends Component {
     if (this.state.stocks) {
       return (
         this.state.stocks.map(stock => (
-            <li className={"one-stock pull-left " + stock.stockClassName} >
-              <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
-                <div className="stockDesc">{stock.title}</div>
-                <div className="stockPrice">$ {stock.currentPrice}</div>
-                <div>Change: {stock.lastChange}</div>
-              </a>
-            </li>
+          <li className={"one-stock pull-left " + stock.stockClassName} >
+            <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
+              <div className="stockDesc">{stock.title}</div>
+              <div className="stockPrice">$ {stock.currentPrice}</div>
+              <div>Change: {stock.lastChange}</div>
+            </a>
+          </li>
         ))
+      )
+    }
+  }
+
+  // update the time when the stocks are last updated
+  lastUpdate() {
+    var length = this.state.stocks.length;
+    if (length === 1) {
+      return (
+        <div className="lastUpdate">Updated: {this.state.stocks[0].lastUpdate}</div>
+      )
+    }
+    else if (length > 1) {
+      var stock = this.state.stocks[length-1];
+      return (
+        <div className="lastUpdate">Updated: {stock.lastUpdate}</div>
+      )
+    }
+    else {
+      return (
+        <div className="lastUpdate"></div>
       )
     }
   }
@@ -142,7 +180,9 @@ class StockMarket extends Component {
             ref={(input) => { this.stockSymbol = input; }}
             onKeyPress={this.getStockData}
           />
-          <ul>
+
+          <ul className="all-stocks">
+            {this.lastUpdate()}
             {this.showData()}
           </ul>
       </div>

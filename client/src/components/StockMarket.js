@@ -11,7 +11,8 @@ class StockMarket extends Component {
       market: null,
       currentPrice: null,
       tickerSymbol: null,
-      lastUpdate: null
+      lastUpdate: null,
+      stocks: []
     }
     this.getStockData = this.getStockData.bind(this);
     this.showData = this.showData.bind(this);
@@ -19,23 +20,33 @@ class StockMarket extends Component {
   }
 
   componentDidMount() {
-    $.ajax({
-      type: 'GET',
-      dataType: 'JSONP',
-      crossDomain: true,
-      url: `http://finance.google.com/finance/info?client=ig&q=.INX`,
-    })
-    .done((response) => {
-      const jsonData = response[0];
-      this.setState({
-        market: jsonData.e,
-        currentPrice: jsonData.l_fix,
-        tickerSymbol: jsonData.t,
-        lastUpdate: jsonData.lt,
-        lastChange: jsonData.c
+    // stock index: s&p 500, dow, nasdaq
+    var indices = ['.INX', '.DJI', '.IXIC'];
+    var stocks = this.state.stocks;
+    indices.map(index => {
+      $.ajax({
+        type: 'GET',
+        dataType: 'JSONP',
+        crossDomain: true,
+        url: `http://finance.google.com/finance/info?client=ig&q=${index}`,
       })
-      this.stockSymbol.value = null;
+      .done((response) => {
+        const jsonData = response[0];
+        var stockData = {
+          'market': jsonData.e,
+          'currentPrice': jsonData.l_fix,
+          'tickerSymbol': jsonData.t,
+          'lastUpdate': jsonData.lt,
+          'lastChange': jsonData.c
+        };
+        stocks.push(stockData);
+      })
     })
+
+    this.setState({
+      stocks
+    })
+    this.stockSymbol.value = null;
   }
 
   // making cross origin browser request using jquery: crossDomain: true
@@ -63,14 +74,16 @@ class StockMarket extends Component {
   }
 
   showData() {
-    if (this.state.tickerSymbol !== null) {
-      return (
-        <li className="one-stock pull-left">
-          <div className="stockDesc">{this.state.market}: {this.state.tickerSymbol}</div>
-          <div className="stockPrice">$ {this.state.currentPrice}</div>
-          <div>Change: {this.state.lastChange}</div>
-        </li>
-      )
+    if (this.state.stocks !== null) {
+        return (
+          this.state.stocks.map(stock => (
+              <li className="one-stock pull-left">
+                <div className="stockDesc">{stock.market}: {stock.tickerSymbol}</div>
+                <div className="stockPrice">$ {stock.currentPrice}</div>
+                <div>Change: {stock.lastChange}</div>
+              </li>
+          ))
+        )
     }
   }
 
@@ -95,7 +108,7 @@ class StockMarket extends Component {
             &nbsp;
             <i className="fa fa-university" aria-hidden="true"></i>
             &nbsp;
-            StockMarket
+            Stock Market
           </h2>
           <span className="pull-right">
             <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>

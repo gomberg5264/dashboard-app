@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import '../stylesheets/StockMarket.css';
 import $ from 'jquery';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
+import alertify from 'alertify.js';
 
 class StockMarket extends Component {
 
   constructor() {
     super();
     this.state = {
-      market: null,
-      currentPrice: null,
-      tickerSymbol: null,
-      lastUpdate: null,
       stocks: []
     }
     this.getStockData = this.getStockData.bind(this);
@@ -125,6 +122,8 @@ class StockMarket extends Component {
         })
         localStorage.setItem('list-of-stock-ticker-symbols', tickerSymbolArray.join());
 
+        alertify.logPosition('top left');
+        alertify.log('Stock Market: \'' + this.stockSymbol.value.toUpperCase() + '\' added!')
         this.stockSymbol.value = null;
       })
     }
@@ -146,6 +145,8 @@ class StockMarket extends Component {
       tickerSymbolArray.push(stock.tickerSymbol);
     })
     localStorage.setItem('list-of-stock-ticker-symbols', tickerSymbolArray.join());
+    alertify.logPosition('top left');
+    alertify.log('Stock Market: \'' + tickerSymbol + '\' deleted!')
   }
 
   // delete icon for user added stocks: not the s&p, dow, nasdaq index
@@ -216,13 +217,13 @@ class StockMarket extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Calendar'">
+      <Popover className="aboutNewsWidget" title="About 'Stock Market'">
         <p>
-          This widget lets you add/delete events to each day.
+          This widget live streams the stock market data. You can add/delete stocks to the watchlist.
         </p>
         <ul>
-          <li>Add Event: Click on a date, enter event on top ('Enter Your Events'), and press 'Enter'.</li><br/>
-          <li>Delete Event: Click the 'x' to the left of the event.</li>
+          <li>Add Stock: Enter stock symbol on top ('Enter Stock Symbol'), and press 'Enter'.</li><br/>
+          <li>Delete Stock: Click the 'x' to the left of the stock.</li>
         </ul>
       </Popover>
     );

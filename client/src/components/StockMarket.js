@@ -20,6 +20,7 @@ class StockMarket extends Component {
     this.lastUpdate = this.lastUpdate.bind(this);
     this.deleteStock = this.deleteStock.bind(this);
     this.deleteIcon = this.deleteIcon.bind(this);
+    this.stockTitle = this.stockTitle.bind(this);
   }
 
   componentDidMount() {
@@ -65,25 +66,13 @@ class StockMarket extends Component {
           'title': title
         };
 
-        // add custom className for the 3 default indices
-        stockData['stockClassName'] = '';
-        if (stockIndex === '.INX') {
-          stockData['stockClassName'] += ' index-average ';
-        }
-        if (stockIndex === '.DJI') {
-          stockData['stockClassName'] += ' index-average ';
-        }
-        if (stockIndex === '.IXIC') {
-          stockData['stockClassName'] += ' index-average ';
-        }
-
         // add stock class depending on last change positive or negative
         // className used for change background to red/green
         if (jsonData.c.charAt(0) === '+') {
-          stockData['stockClassName'] += ' stockGreen ';
+          stockData['stockClassName'] = 'stockGreen';
         }
         if (jsonData.c.charAt(0) === '-') {
-          stockData['stockClassName'] += ' stockRed ';
+          stockData['stockClassName'] = 'stockRed';
         }
         var stocks = this.state.stocks;
         stocks[idx] = stockData;
@@ -173,6 +162,20 @@ class StockMarket extends Component {
     }
   }
 
+  // stock title to display: diffrent style for index vs. stocks
+  stockTitle(title) {
+    if (title === 'S&P 500' || title === 'DOW' || title === 'NASDAQ') {
+      return (
+        <div className="stockDesc index-average">{title}</div>
+      )
+    }
+    else {
+      return (
+        <div className="stockDesc">{title}</div>
+      )
+    }
+  }
+
   showData() {
     if (this.state.stocks) {
       return (
@@ -180,7 +183,7 @@ class StockMarket extends Component {
           <li className={"one-stock pull-left " + stock.stockClassName} >
             {this.deleteIcon(idx, stock.tickerSymbol)}
             <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
-              <div className="stockDesc">{stock.title}</div>
+              {this.stockTitle(stock.title)}
               <div className="stockPrice">$ {stock.currentPrice}</div>
               <div>Change: {stock.lastChange}</div>
             </a>

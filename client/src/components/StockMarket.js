@@ -49,6 +49,7 @@ class StockMarket extends Component {
       })
       .done((response) => {
         const jsonData = response[0];
+        console.log(jsonData);
         this.setState({
           market: jsonData.e,
           currentPrice: jsonData.l_fix,
@@ -64,12 +65,11 @@ class StockMarket extends Component {
   showData() {
     if (this.state.tickerSymbol !== null) {
       return (
-        <ul>
-          <li className="stockDesc">{this.state.market}: {this.state.tickerSymbol}</li>
-          <li className="stockPrice">$ {this.state.currentPrice}</li>
-          <li>Change: {this.state.lastChange}</li>
-          <li>Last Updated: {this.state.lastUpdate}</li>
-        </ul>
+        <li className="one-stock pull-left">
+          <div className="stockDesc">{this.state.market}: {this.state.tickerSymbol}</div>
+          <div className="stockPrice">$ {this.state.currentPrice}</div>
+          <div>Change: {this.state.lastChange}</div>
+        </li>
       )
     }
   }
@@ -102,14 +102,16 @@ class StockMarket extends Component {
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
             </OverlayTrigger>
           </span>
-            <input
-              className="stock-market-input text-center"
-              type="text"
-              placeholder="Enter Stock Symbol"
-              ref={(input) => { this.stockSymbol = input; }}
-              onKeyPress={this.getStockData}
-            />
-        {this.showData()}
+          <input
+            className="stock-market-input text-center"
+            type="text"
+            placeholder="Enter Stock Symbol"
+            ref={(input) => { this.stockSymbol = input; }}
+            onKeyPress={this.getStockData}
+          />
+          <ul>
+            {this.showData()}
+          </ul>
       </div>
     );
   }

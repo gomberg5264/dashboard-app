@@ -3,7 +3,7 @@
   background-color: rgba(1,1,1,0.1);
   padding: 5px;
   height: 28rem;
-  /*box-shadow: 0 4px 8px 0 white, 0 3px 10px 0 white;*/
+  /*box-shadow: 0 4px 8px 0 black, 0 3px 10px 0 black;*/
   box-shadow:   1px 1px 0px  black,
                 2px 2px 0px  black,
                 3px 3px 0px  black,
@@ -69,3 +69,12 @@ hr {
   background: transparent;
   outline: 0 none;
 }
+
+.one-stock {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid white;
+  background-color: rgba(1,1,1,0.3);
+}
+
+

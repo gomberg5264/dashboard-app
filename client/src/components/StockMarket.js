@@ -31,24 +31,25 @@ class StockMarket extends Component {
       })
       .done((response) => {
         const jsonData = response[0];
-        var tickerSymbol = jsonData.t;
+        var title = jsonData.t;
         // add custom name for the 3 default indices
         if (stockIndex === '.INX') {
-          tickerSymbol = 'S&P 500';
+          title = 'S&P 500';
         }
         if (stockIndex === '.DJI') {
-          tickerSymbol = 'DOW';
+          title = 'DOW';
         }
         if (stockIndex === '.IXIC') {
-          tickerSymbol = 'NASDAQ';
+          title = 'NASDAQ';
         }
         var stockData = {
           'index': idx,
           'market': jsonData.e,
           'currentPrice': jsonData.l_fix,
-          'tickerSymbol': tickerSymbol,
+          'tickerSymbol': jsonData.t,
           'lastUpdate': jsonData.lt,
-          'lastChange': jsonData.c
+          'lastChange': jsonData.c,
+          'title': title
         };
         // add stock class depending on last change positive or negative
         // className used for change background to red/green
@@ -95,9 +96,11 @@ class StockMarket extends Component {
       return (
         this.state.stocks.map(stock => (
             <li className={"one-stock pull-left " + stock.stockClassName} >
-              <div className="stockDesc">{stock.tickerSymbol}</div>
-              <div className="stockPrice">$ {stock.currentPrice}</div>
-              <div>Change: {stock.lastChange}</div>
+              <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
+                <div className="stockDesc">{stock.title}</div>
+                <div className="stockPrice">$ {stock.currentPrice}</div>
+                <div>Change: {stock.lastChange}</div>
+              </a>
             </li>
         ))
       )

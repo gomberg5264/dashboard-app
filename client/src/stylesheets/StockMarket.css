@@ -85,10 +85,17 @@ hr {
   background-color: rgba(0, 250, 0, 0.3);
 }
 
+.stockGreen:hover {
+  background-color: rgba(0,250,0,0.5);
+}
+
 .stockRed {
   background-color: rgba(250, 0, 0, 0.3);
 }
 
+.stockRed:hover {
+  background-color: rgba(250,0,0,0.5);
+}
 
 
 

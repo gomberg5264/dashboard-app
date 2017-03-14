@@ -94,8 +94,8 @@ class Postit extends Component {
           This widget lets you add/delete events to each day.
         </p>
         <ul>
-          <li>Add Event: Click on a date, enter event on top ('Enter Your Events'), and press 'Enter'.</li><br/>
-          <li>Delete Event: Click the 'x' to the left of the event.</li>
+          <li><strong>Add Event</strong>: Click on a date, enter event on top ('Enter Your Events'), and press 'Enter'.</li><br/>
+          <li><strong>Delete Event</strong>: Click the 'x' to the left of the event.</li>
         </ul>
       </Popover>
     );

@@ -64,9 +64,11 @@ class News extends Component {
           This widget gives you the top 10 tech news updated several times a day.
         </p>
         <ul>
-          <li>View More: Scroll down with your mouse/trackpad to view the rest of the news feed.
+          <li>
+            <strong>View More</strong>: Scroll down with your mouse/trackpad to view the rest of the news feed.
           </li><br />
-          <li>Read Full News: Click on the news title you like, it'll open a new tab
+          <li>
+            <strong>Read Full News</strong>: Click on the news title you like, it'll open a new tab
             that has full news.
           </li>
         </ul>

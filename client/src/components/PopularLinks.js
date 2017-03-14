@@ -26,9 +26,9 @@ class PopularLinks extends Component {
           This widget has the links to some of the most popular apps that you may visit daily.
         </p>
         <ul>
-          <li>Don't Recognize The Icon?: Hover on the app icon, and it'll tell you.
+          <li><strong>Don't Recognize The Icon?</strong>: Hover on the app icon, and it'll tell you.
           </li><br />
-          <li>Open An App: Click on any app icon, and it'll take you to the app's site.
+          <li><strong>Open An App</strong>: Click on any app icon, and it'll take you to the app's site.
           </li>
         </ul>
       </Popover>

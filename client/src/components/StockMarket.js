@@ -18,6 +18,7 @@ class StockMarket extends Component {
     this.deleteStock = this.deleteStock.bind(this);
     this.deleteIcon = this.deleteIcon.bind(this);
     this.stockTitle = this.stockTitle.bind(this);
+    this.updateStocks = this.updateStocks.bind(this);
   }
 
   componentDidMount() {
@@ -122,8 +123,14 @@ class StockMarket extends Component {
         })
         localStorage.setItem('list-of-stock-ticker-symbols', tickerSymbolArray.join());
 
+        // update all the stocks with the current stock
+        this.componentDidMount();
+
+        // alert the new stock added
         alertify.logPosition('top left');
         alertify.log('Stock Market: \'' + this.stockSymbol.value.toUpperCase() + '\' added!')
+
+        // empty the input box
         this.stockSymbol.value = null;
       })
     }
@@ -194,18 +201,43 @@ class StockMarket extends Component {
     }
   }
 
+  // update the stocks with 2 seconds refresh animation
+  updateStocks() {
+    $('.updateStocksIcon').html('<i class="fa fa-refresh fa-spin" aria-hidden="true"></i>');
+    setTimeout(() => {
+      // update the stocks calling componenDidMount
+      this.componentDidMount();
+      $('.updateStocksIcon').html('<i class="fa fa-refresh" aria-hidden="true"></i>');
+      alertify.logPosition('top left');
+      alertify.log('Stock Market: Just Updated!');
+    }, 2000);
+
+  }
+
   // update the time when the stocks are last updated
   lastUpdate() {
     var length = this.state.stocks.length;
     if (length === 1) {
       return (
-        <div className="lastUpdate">Updated: {this.state.stocks[0].lastUpdate}</div>
+        <div className="lastUpdate">
+          <span className="updateStocksIcon" onClick={this.updateStocks}>
+            <i className="fa fa-refresh" aria-hidden="true"></i>
+          </span>
+          &nbsp;
+          Updated: {this.state.stocks[0].lastUpdate}
+        </div>
       )
     }
     else if (length > 1) {
       var stock = this.state.stocks[length-1];
       return (
-        <div className="lastUpdate">Updated: {stock.lastUpdate}</div>
+        <div className="lastUpdate">
+          <span className="updateStocksIcon" onClick={this.updateStocks}>
+            <i className="fa fa-refresh" aria-hidden="true"></i>
+          </span>
+          &nbsp;
+          Updated: {stock.lastUpdate}
+        </div>
       )
     }
     else {
@@ -220,10 +252,12 @@ class StockMarket extends Component {
       <Popover className="aboutNewsWidget" title="About 'Stock Market'">
         <p>
           This widget live streams the stock market data. You can add/delete stocks to the watchlist.
+          And refresh stocks data.
         </p>
         <ul>
-          <li>Add Stock: Enter stock symbol on top ('Enter Stock Symbol'), and press 'Enter'.</li><br/>
-          <li>Delete Stock: Click the 'x' to the left of the stock.</li>
+          <li><strong>Add Stock</strong>: Enter stock symbol on top ('Enter Stock Symbol'), and press 'Enter'.</li><br/>
+          <li><strong>Delete Stock</strong>: Click the 'x' to the left of the stock.</li><br />
+          <li><strong>Refresh Stocks</strong>: Click on the refresh icons to the left of 'Updated: ...'</li>
         </ul>
       </Popover>
     );
@@ -239,7 +273,7 @@ class StockMarket extends Component {
             Stock Market
           </h2>
           <span className="pull-right">
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+            <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
             </OverlayTrigger>
           </span>

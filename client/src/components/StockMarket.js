@@ -18,11 +18,19 @@ class StockMarket extends Component {
     this.showData = this.showData.bind(this);
     this.moreInfo = this.moreInfo.bind(this);
     this.lastUpdate = this.lastUpdate.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   componentDidMount() {
     // stock index: s&p 500, dow, nasdaq
     var indices = ['.INX', '.DJI', '.IXIC'];
+
+    // grab the stock symbols from localStorage if exists
+    var tickerSymbol = localStorage.getItem('list-of-stock-ticker-symbols');
+    if (tickerSymbol) {
+      var indices = tickerSymbol.split(',');
+    }
+
     indices.map((stockIndex, idx) => {
       $.ajax({
         type: 'GET',
@@ -102,10 +110,22 @@ class StockMarket extends Component {
         stocks.push(stockData);
         this.setState({
           stocks
+        });
+
+        // store the stocks in localStorage
+        var tickerSymbolArray = [];
+        this.state.stocks.map(stock => {
+          tickerSymbolArray.push(stock.tickerSymbol);
         })
+        localStorage.setItem('list-of-stock-ticker-symbols', tickerSymbolArray.join());
+
         this.stockSymbol.value = null;
       })
     }
+  }
+
+  deleteEvent() {
+
   }
 
   showData() {
@@ -113,6 +133,12 @@ class StockMarket extends Component {
       return (
         this.state.stocks.map(stock => (
           <li className={"one-stock pull-left " + stock.stockClassName} >
+            <span className="deleteIconStock">
+              <i className="fa fa-times-circle-o pull-left"
+                 aria-hidden="true"
+                 onClick={() => {this.deleteEvent()}}
+                 />
+            </span>
             <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
               <div className="stockDesc">{stock.title}</div>
               <div className="stockPrice">$ {stock.currentPrice}</div>

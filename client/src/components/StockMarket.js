@@ -22,7 +22,6 @@ class StockMarket extends Component {
   componentDidMount() {
     // stock index: s&p 500, dow, nasdaq
     var indices = ['.INX', '.DJI', '.IXIC'];
-    var stocks = this.state.stocks;
     indices.map(index => {
       $.ajax({
         type: 'GET',
@@ -39,14 +38,13 @@ class StockMarket extends Component {
           'lastUpdate': jsonData.lt,
           'lastChange': jsonData.c
         };
+        var stocks = this.state.stocks;
         stocks.push(stockData);
+        this.setState({
+          stocks
+        })
       })
     })
-
-    this.setState({
-      stocks
-    })
-    this.stockSymbol.value = null;
   }
 
   // making cross origin browser request using jquery: crossDomain: true
@@ -73,6 +71,19 @@ class StockMarket extends Component {
     }
   }
 
+  showData() {
+    if (this.state.stocks) {
+      return (
+        this.state.stocks.map(stock => (
+            <li className="one-stock pull-left">
+              <div className="stockDesc">{stock.market}: {stock.tickerSymbol}</div>
+              <div className="stockPrice">$ {stock.currentPrice}</div>
+              <div>Change: {stock.lastChange}</div>
+            </li>
+        ))
+      )
+    }
+  }
 
   moreInfo() {
     return (

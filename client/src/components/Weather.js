@@ -17,7 +17,7 @@ class Weather extends Component {
       currentTempMax: null,
       currentSummary: null,
       currentTime: null,
-      currentHumidity: null
+      currentHumidity: null,
     }
     this.addZipcode = this.addZipcode.bind(this);
     this.kelvinToFarenheit = this.kelvinToFarenheit.bind(this);
@@ -26,44 +26,32 @@ class Weather extends Component {
   }
 
   componentDidMount() {
-    // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=10013&key=${apiKeys.googleMapsAPI}`)
-    // .then((response) => {
-    //   var lng = response.data.results[0].geometry.location.lng;
-    //   var lat = response.data.results[0].geometry.location.lat;
-    //   var city = response.data.results[0].address_components[1].long_name;
-    //   axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=10013,us&appid=${apiKeys.openWeatherAPI}`)
-    //   .then((res) => {
-    //     this.setState({
-    //       currentCity: city,
-    //       currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
-    //       currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
-    //       currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
-    //       currentSummary: res.data.list[0].weather[0].description,
-    //       currentTime: res.data.list[0].dt,
-    //       currentHumidity: res.data.list[0].main.humidity
-    //     })
-    //     // console.log(this.state);
-    //   })
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // })
-
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=99501&key=${apiKeys.googleMapsAPI}`)
-    .then((response) => {
-      var lng = response.data.results[0].geometry.location.lng;
-      var lat = response.data.results[0].geometry.location.lat;
-      var city = response.data.results[0].address_components[1].long_name;
-      console.log(lat);
-      console.log(lng);
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=10013&key=${apiKeys.googleMapsAPI}`)
+    .then((g_maps_response) => {
+      var lng = g_maps_response.data.results[0].geometry.location.lng;
+      var lat = g_maps_response.data.results[0].geometry.location.lat;
+      var city = g_maps_response.data.results[0].address_components[1].long_name;
       $.ajax({
         type: 'GET',
         dataType: 'JSONP',
         crossDomain: true,
         url: `https://api.darksky.net/forecast/2ad9f45710a06578824125b097bd4f93/${lat},${lng}`,
       })
-      .done((response) => {
-        console.log(response);
+      .done((darksky_response) => {
+        axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=10013,us&appid=${apiKeys.openWeatherAPI}`)
+        .then((openweather_res) => {
+          var humidity = darksky_response.currently.humidity * 100;
+          this.setState({
+            currentCity: city,
+            currentTime: darksky_response.currently.time,
+            currentSummary: darksky_response.currently.summary,
+            currentIcon: darksky_response.currently.icon,
+            currentTemp: darksky_response.currently.temperature,
+            currentHumidity: humidity,
+            currentTempMin: this.kelvinToFarenheit(openweather_res.data.list[0].main.temp_min),
+            currentTempMax: this.kelvinToFarenheit(openweather_res.data.list[0].main.temp_max),
+          })
+        })
       })
     })
   }

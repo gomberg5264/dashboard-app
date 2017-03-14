@@ -18,7 +18,7 @@ class StockMarket extends Component {
     this.showData = this.showData.bind(this);
     this.moreInfo = this.moreInfo.bind(this);
     this.lastUpdate = this.lastUpdate.bind(this);
-    this.deleteEvent = this.deleteEvent.bind(this);
+    this.deleteStock = this.deleteStock.bind(this);
     this.deleteIcon = this.deleteIcon.bind(this);
   }
 
@@ -125,18 +125,32 @@ class StockMarket extends Component {
     }
   }
 
-  deleteEvent() {
+  deleteStock(idxToDelete, tickerSymbol) {
+    var stocks = this.state.stocks;
+    // delete that item from the array
+    stocks.splice(idxToDelete,1);
 
+    // update the state with new stocks array
+    this.setState({
+      stocks
+    });
+
+    // update the localStorage
+    var tickerSymbolArray = [];
+    this.state.stocks.map(stock => {
+      tickerSymbolArray.push(stock.tickerSymbol);
+    })
+    localStorage.setItem('list-of-stock-ticker-symbols', tickerSymbolArray.join());
   }
 
   // delete icon for user added stocks: not the s&p, dow, nasdaq index
-  deleteIcon(tickerSymbol) {
+  deleteIcon(idxToDelete, tickerSymbol) {
     if (tickerSymbol !== '.INX' && tickerSymbol !== '.DJI' && tickerSymbol !== '.IXIC') {
       return (
         <span className="deleteIconStock">
           <i className="fa fa-times-circle-o pull-left"
              aria-hidden="true"
-             onClick={() => {this.deleteEvent()}}
+             onClick={() => {this.deleteStock(idxToDelete, tickerSymbol)}}
              />
         </span>
       )
@@ -146,9 +160,9 @@ class StockMarket extends Component {
   showData() {
     if (this.state.stocks) {
       return (
-        this.state.stocks.map(stock => (
+        this.state.stocks.map((stock, idx) => (
           <li className={"one-stock pull-left " + stock.stockClassName} >
-            {this.deleteIcon(stock.tickerSymbol)}
+            {this.deleteIcon(idx, stock.tickerSymbol)}
             <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
               <div className="stockDesc">{stock.title}</div>
               <div className="stockPrice">$ {stock.currentPrice}</div>

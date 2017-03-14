@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Button, Glyphicon} from 'react-bootstrap';
 import apiKeys from '../config.js';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
+import $ from 'jquery';
 
 class Weather extends Component {
   constructor() {
@@ -25,27 +26,45 @@ class Weather extends Component {
   }
 
   componentDidMount() {
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=10013&key=${apiKeys.googleMapsAPI}`)
+    // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=10013&key=${apiKeys.googleMapsAPI}`)
+    // .then((response) => {
+    //   var lng = response.data.results[0].geometry.location.lng;
+    //   var lat = response.data.results[0].geometry.location.lat;
+    //   var city = response.data.results[0].address_components[1].long_name;
+    //   axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=10013,us&appid=${apiKeys.openWeatherAPI}`)
+    //   .then((res) => {
+    //     this.setState({
+    //       currentCity: city,
+    //       currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
+    //       currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
+    //       currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
+    //       currentSummary: res.data.list[0].weather[0].description,
+    //       currentTime: res.data.list[0].dt,
+    //       currentHumidity: res.data.list[0].main.humidity
+    //     })
+    //     // console.log(this.state);
+    //   })
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // })
+
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=99501&key=${apiKeys.googleMapsAPI}`)
     .then((response) => {
       var lng = response.data.results[0].geometry.location.lng;
       var lat = response.data.results[0].geometry.location.lat;
       var city = response.data.results[0].address_components[1].long_name;
-      axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=10013,us&appid=${apiKeys.openWeatherAPI}`)
-      .then((res) => {
-        this.setState({
-          currentCity: city,
-          currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
-          currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
-          currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
-          currentSummary: res.data.list[0].weather[0].description,
-          currentTime: res.data.list[0].dt,
-          currentHumidity: res.data.list[0].main.humidity
-        })
-        // console.log(this.state);
+      console.log(lat);
+      console.log(lng);
+      $.ajax({
+        type: 'GET',
+        dataType: 'JSONP',
+        crossDomain: true,
+        url: `https://api.darksky.net/forecast/2ad9f45710a06578824125b097bd4f93/${lat},${lng}`,
       })
-    })
-    .catch(function (error) {
-      console.log(error);
+      .done((response) => {
+        console.log(response);
+      })
     })
   }
 
@@ -74,6 +93,11 @@ class Weather extends Component {
             currentTime: res.data.list[0].dt,
             currentHumidity: res.data.list[0].main.humidity
           })
+          console.log(lat);
+          console.log(lng);
+          console.log(this.state.currentTemp);
+          console.log(this.state.currentTempMin);
+          console.log(this.state.currentTempMax);
           // console.log(this.state);
         })
       })
@@ -125,12 +149,8 @@ class Weather extends Component {
     return (
       <div className="main_Weather text-center">
         <h2 className="pull-left">
-          <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
-            <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
-          </OverlayTrigger>
-          &nbsp;
-          Weather</h2>
-        <span className="pull-right">
+          Weather
+        </h2>
           <input
             className="weather-input text-center"
             type="text"
@@ -138,6 +158,10 @@ class Weather extends Component {
             ref={(input) => { this.zipCode = input; }}
             onKeyPress={this.addZipcode}
           />
+        <span className="pull-right">
+          <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+            <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+          </OverlayTrigger>
         </span>
         <br />
         {this.weatherInfo()}

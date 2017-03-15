@@ -124,11 +124,34 @@ ul > h3, .iconClass, .currentTemp {
 }
 
 .details {
-  margin-top: 2rem;
+  margin-top: 3px;
   font-size: 20px;
 }
 
 .cityName {
   font-size: 30px;
 }
+
+.weather-current {
+  margin-top: 10px;
+}
+
+.one-forecast-day{
+  display: inline-block;
+  border: 1px solid white;
+  margin: 0 3px;
+  width: 80px;
+  height: 80px;
+  overflow: scroll;
+}
+
+.all-forecast-day {
+  margin-top: 15px;
+}
+
+.temp-min-max-forecast {
+  font-size: 12px;
+}
+
+
 

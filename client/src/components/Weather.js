@@ -5,24 +5,20 @@ import {Button, Glyphicon} from 'react-bootstrap';
 import apiKeys from '../config.js';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import $ from 'jquery';
+import moment from 'moment';
 
 class Weather extends Component {
   constructor() {
     super();
     this.state = {
-      currentCity: null,
-      currentIcon: null,
+      city: null,
       currentTemp: null,
-      currentTempMin: null,
-      currentTempMax: null,
-      currentSummary: null,
-      currentTime: null,
-      currentHumidity: null,
+      weather_next_week: []
     }
     this.addZipcode = this.addZipcode.bind(this);
-    this.kelvinToFarenheit = this.kelvinToFarenheit.bind(this);
     this.weatherInfo = this.weatherInfo.bind(this);
     this.moreInfo = this.moreInfo.bind(this);
+    this.forecast = this.forecast.bind(this);
   }
 
   componentDidMount() {
@@ -35,30 +31,31 @@ class Weather extends Component {
         type: 'GET',
         dataType: 'JSONP',
         crossDomain: true,
-        url: `https://api.darksky.net/forecast/2ad9f45710a06578824125b097bd4f93/${lat},${lng}`,
+        url: `https://api.darksky.net/forecast/${apiKeys.darkSkyAPI}/${lat},${lng}`,
       })
       .done((darksky_response) => {
-        axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=10013,us&appid=${apiKeys.openWeatherAPI}`)
-        .then((openweather_res) => {
-          var humidity = darksky_response.currently.humidity * 100;
-          this.setState({
-            currentCity: city,
-            currentTime: darksky_response.currently.time,
-            currentSummary: darksky_response.currently.summary,
-            currentIcon: darksky_response.currently.icon,
-            currentTemp: darksky_response.currently.temperature,
-            currentHumidity: humidity,
-            currentTempMin: this.kelvinToFarenheit(openweather_res.data.list[0].main.temp_min),
-            currentTempMax: this.kelvinToFarenheit(openweather_res.data.list[0].main.temp_max),
-          })
+        var currentTemp = darksky_response.currently.temperature;
+        var weather_next_week = [];
+        darksky_response.daily.data.map(day => {
+          var weatherObjOneDay = {};
+          var time = moment.unix(day.time).format("dddd");
+          weatherObjOneDay['time'] = time,
+          weatherObjOneDay['summary'] = day.summary,
+          weatherObjOneDay['icon'] = day.icon,
+          weatherObjOneDay['humidity'] = day.humidity * 100,
+          weatherObjOneDay['temperatureMin'] = day.temperatureMin,
+          weatherObjOneDay['temperatureMax'] = day.temperatureMax
+          weather_next_week.push(weatherObjOneDay);
+        })
+        // get weather for next six days from today, not seven days
+        weather_next_week = weather_next_week.slice(0,7);
+        this.setState({
+          city,
+          currentTemp,
+          weather_next_week
         })
       })
     })
-  }
-
-  kelvinToFarenheit(kelvin) {
-     // T(K) × 9/5 - 459.67
-     return (kelvin * 9/5 - 459.67).toFixed(2);
   }
 
   addZipcode(e) {
@@ -95,25 +92,44 @@ class Weather extends Component {
     }
   }
 
-  weatherInfo() {
-    if (this.state.currentCity !== null) {
-      const weatherIcons = ['cloud', 'sun', 'clear', 'rain', 'snow', 'thunder' ];
-      var iconClass = null;
-      weatherIcons.map((desc, idx) => {
-        if (this.state.currentSummary.match(`${desc}`) !== null) {
-          iconClass = weatherIcons[idx];
-        }
-      })
+  forecast() {
+    if (this.state.weather_next_week.length > 1) {
       return (
-        <ul>
-          <div className={iconClass + " iconClass"} />
-          <h3><span className="cityName">{this.state.currentCity}</span></h3>
+        this.state.weather_next_week.slice(1,6).map(day => (
+          <li className="one-forecast-day">
+            <div>{day.time}</div>
+            <br />
+            <div className="temp-min-max-forecast">{day.temperatureMin} &#8457;/<br />
+             {day.temperatureMax} &#8457;
+            </div>
+          </li>
+        ))
+      )
+    }
+  }
+
+  weatherInfo() {
+    if (this.state.weather_next_week.length > 0) {
+      // const weatherIcons = ['cloud', 'sun', 'clear', 'rain', 'snow', 'thunder' ];
+      // var iconClass = null;
+      // weatherIcons.map((desc, idx) => {
+      //   if (this.state.currentSummary.match(`${desc}`) !== null) {
+      //     iconClass = weatherIcons[idx];
+      //   }
+      // })
+      return (
+        <ul className="weather-current">
+          {/*<div className={iconClass + " iconClass"} />*/}
+          <h3><span className="cityName">{this.state.city}</span></h3>
           <div className="currentTemp">{this.state.currentTemp} &#8457;</div>
           <div className="details">
-            <li>{this.state.currentTempMin} &#8457;/{this.state.currentTempMax} &#8457;</li>
-            <li>{this.state.currentSummary}</li>
-            <li>Humidity: {this.state.currentHumidity}%</li>
+            <li>{this.state.weather_next_week[0].summary}</li>
+            <li>{this.state.weather_next_week[0].temperatureMin} &#8457;/{this.state.weather_next_week[0].temperatureMax} &#8457;</li>
+            <li>Humidity: {this.state.weather_next_week[0].humidity}%</li>
           </div>
+          <ul className="all-forecast-day">
+            {this.forecast()}
+          </ul>
         </ul>
       )
     }

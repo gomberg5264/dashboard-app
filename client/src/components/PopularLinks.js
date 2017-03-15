@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/PopularLinks.css';
 import { SocialIcon } from 'react-social-icons';
@@ -13,7 +14,7 @@ class PopularLinks extends Component {
 
   appInfo(title) {
     return (
-      <Popover>
+      <Popover id="app-title">
         <span>{title}</span>
       </Popover>
     )
@@ -21,7 +22,7 @@ class PopularLinks extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Links'">
+      <Popover id="links widget" className="aboutNewsWidget" title="About 'Links'">
         <p>
           This widget has the links to some of the most popular apps that you may visit daily.
         </p>
@@ -39,57 +40,57 @@ class PopularLinks extends Component {
     return (
       <ul className="align-center apps-body">
         <li>
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Facebook')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Facebook')}>
               <SocialIcon url="http://facebook.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Twitter')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Twitter')}>
               <SocialIcon url="http://twitter.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('YouTube')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('YouTube')}>
               <SocialIcon url="http://youtube.com" />
             </OverlayTrigger>
         </li>
         <br />
         <li>
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Dropbox')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Dropbox')}>
               <SocialIcon url="http://dropbox.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('GitHub')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('GitHub')}>
               <SocialIcon url="http://github.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Google+')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Google+')}>
               <SocialIcon url="https://plus.google.com" />
             </OverlayTrigger>
         </li>
         <br />
         <li>
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Pinterest')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Pinterest')}>
               <SocialIcon url="http://pinterest.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('LinkedIn')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('LinkedIn')}>
               <SocialIcon url="http://linkedin.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Tumblr')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Tumblr')}>
               <SocialIcon url="http://tumblr.com" />
             </OverlayTrigger>
         </li>
         <br />
         <li>
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('Flickr')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('Flickr')}>
               <SocialIcon url="http://flickr.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('FourSquare')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('FourSquare')}>
               <SocialIcon url="http://foursquare.com" />
             </OverlayTrigger>
             &nbsp;
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.appInfo('MeetUp')}>
+            <OverlayTrigger placement="bottom" overlay={this.appInfo('MeetUp')}>
               <SocialIcon url="http://meetup.com" />
             </OverlayTrigger>
         </li>
@@ -108,7 +109,7 @@ class PopularLinks extends Component {
           Links
         </h2>
         <span className="pull-right">
-          <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+          <OverlayTrigger placement="bottom" overlay={this.moreInfo()}>
             <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
           </OverlayTrigger>
         </span>

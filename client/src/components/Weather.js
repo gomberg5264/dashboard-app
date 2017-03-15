@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/Weather.css';
 import axios from 'axios';
-import {Button, Glyphicon} from 'react-bootstrap';
 import apiKeys from '../config.js';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import $ from 'jquery';
@@ -48,12 +48,12 @@ class Weather extends Component {
         darksky_response.daily.data.map(day => {
           var weatherObjOneDay = {};
           var time = moment.unix(day.time).format("dddd");
-          weatherObjOneDay['time'] = time,
-          weatherObjOneDay['summary'] = day.summary,
-          weatherObjOneDay['icon'] = day.icon,
-          weatherObjOneDay['humidity'] = Number(day.humidity * 100).toFixed(2),
-          weatherObjOneDay['temperatureMin'] = day.temperatureMin,
-          weatherObjOneDay['temperatureMax'] = day.temperatureMax
+          weatherObjOneDay['time'] = time;
+          weatherObjOneDay['summary'] = day.summary;
+          weatherObjOneDay['icon'] = day.icon;
+          weatherObjOneDay['humidity'] = Number(day.humidity * 100).toFixed(2);
+          weatherObjOneDay['temperatureMin'] = day.temperatureMin;
+          weatherObjOneDay['temperatureMax'] = day.temperatureMax;
           weather_next_week.push(weatherObjOneDay);
         })
         // get weather for next six days from today, not seven days
@@ -87,12 +87,12 @@ class Weather extends Component {
           darksky_response.daily.data.map(day => {
             var weatherObjOneDay = {};
             var time = moment.unix(day.time).format("dddd");
-            weatherObjOneDay['time'] = time,
-            weatherObjOneDay['summary'] = day.summary,
-            weatherObjOneDay['icon'] = day.icon,
-            weatherObjOneDay['humidity'] = Number(day.humidity * 100).toFixed(2),
-            weatherObjOneDay['temperatureMin'] = day.temperatureMin,
-            weatherObjOneDay['temperatureMax'] = day.temperatureMax
+            weatherObjOneDay['time'] = time;
+            weatherObjOneDay['summary'] = day.summary;
+            weatherObjOneDay['icon'] = day.icon;
+            weatherObjOneDay['humidity'] = Number(day.humidity * 100).toFixed(2);
+            weatherObjOneDay['temperatureMin'] = day.temperatureMin;
+            weatherObjOneDay['temperatureMax'] = day.temperatureMax;
             weather_next_week.push(weatherObjOneDay);
           })
           // get weather for next six days from today, not seven days
@@ -118,79 +118,66 @@ class Weather extends Component {
       return (
         <i className="wi wi-day-sunny"></i>
       )
-     break;
 
      case("clear-night"):
       return (
         <i className="wi wi-night-clear"></i>
       )
-     break;
 
      case("rain"):
       return (
         <i className="wi wi-showers"></i>
       )
-     break;
 
      case("snow"):
       return (
         <i className="wi wi-snow"></i>
       )
-     break;
 
      case("sleet"):
       return (
         <i className="wi wi-night-sleet"></i>
       )
-     break;
 
      case("wind"):
       return (
         <i className="wi wi-sleet"></i>
       )
-     break;
 
      case("fog"):
       return (
         <i className="wi wi-fog"></i>
       )
-     break;
 
      case("cloudy"):
       return (
         <i className="wi wi-cloudy"></i>
       )
-     break;
 
      case("partly-cloudy-day"):
       return (
         <i className="wi wi-day-cloudy"></i>
       )
-     break;
 
      case("partly-cloudy-night"):
       return (
         <i className="wi wi-night-alt-cloudy"></i>
       )
-     break;
 
      case("thunderstrom"):
       return (
         <i className="wi wi-thunderstorm"></i>
       )
-     break;
 
      case("tornado"):
       return (
         <i className="wi wi-tornado"></i>
       )
-     break;
 
      case("hail"):
       return (
         <i className="wi wi-hail"></i>
       )
-     break;
 
      default:
 
@@ -200,8 +187,8 @@ class Weather extends Component {
   forecast() {
     if (this.state.weather_next_week.length > 1) {
       return (
-        this.state.weather_next_week.slice(1,6).map(day => (
-          <li className="one-forecast-day">
+        this.state.weather_next_week.slice(1,6).map((day, idx) => (
+          <li className="one-forecast-day" key={idx}>
             <div>{day.time}</div>
               <span className="weather-icons">
                 {this.weatherIcon(day.icon)}
@@ -242,7 +229,7 @@ class Weather extends Component {
 
  moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Weather'">
+      <Popover id="weather widget" className="aboutNewsWidget" title="About 'Weather'">
         <p>
           This widget gives you the current weather and next 5 days forecast.
         </p>
@@ -271,7 +258,7 @@ class Weather extends Component {
             onKeyPress={this.addZipcode}
           />
         <span className="pull-right">
-          <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
+          <OverlayTrigger placement="top" overlay={this.moreInfo()}>
             <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
           </OverlayTrigger>
         </span>

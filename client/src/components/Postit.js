@@ -1,11 +1,10 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/Postit.css';
-import axios from 'axios';
-import {Button, Glyphicon, Popover, OverlayTrigger} from 'react-bootstrap';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
 import alertify from 'alertify.js';
-import gmail_icon from '../images/gmail-icon.png';
 import 'react-date-picker/index.css';
-import { DateField, Calendar } from 'react-date-picker';
+import { Calendar } from 'react-date-picker';
 import moment from 'moment';
 
 class Postit extends Component {
@@ -89,7 +88,7 @@ class Postit extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Calendar'">
+      <Popover id="calendar widget" className="aboutNewsWidget" title="About 'Calendar'">
         <p>
           This widget lets you add/delete events to each day.
         </p>
@@ -124,7 +123,7 @@ class Postit extends Component {
     if (this.state.notes) {
       return (
         this.state.notes.map((note, idx) => (
-          <li className="each-note">{note}
+          <li className="each-note" key={idx}>{note}
             <i className="fa fa-times-circle-o pull-left deleteIcon"
                aria-hidden="true"
                onClick={() => {this.deleteEvent(idx,note)}}
@@ -146,7 +145,7 @@ class Postit extends Component {
             Calendar
           </h2>
           <span className="pull-right">
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+            <OverlayTrigger placement="bottom" overlay={this.moreInfo()}>
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
             </OverlayTrigger>
           </span>

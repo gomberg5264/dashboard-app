@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/News.css';
 import axios from 'axios';
 import apiKeys from '../config.js';
-import the_next_web_logo from '../images/the_next_web_logo.png';
 import moment from 'moment';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 
@@ -21,6 +21,7 @@ class News extends Component {
     // axios.get(`https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=84c64f8b7b9b43a39644758899bb99b6`)
     axios.get(`https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=${apiKeys.newsAPI}`)
     .then((res) => {
+
       this.setState({
         articles: res.data.articles
       })
@@ -35,16 +36,18 @@ class News extends Component {
     time = time.replace("Z", ' ');
     var date = new Date(`${time} UTC`);
     date = moment(date).calendar();
-    return date.toString();
+    return date;
   }
 
   showLatestNews() {
     if (this.state.articles.length > 0) {
       return (
-        this.state.articles.map((article) => (
-          <div className="one_article">
+        this.state.articles.map((article, idx) => (
+          <div className="one_article" key={idx}>
             <a href={article.url} target="_blank">
-              <img className="pull-left news-image" src={article.urlToImage} height="83px" width="100px"/>
+              <img className="pull-left news-image"
+                src={article.urlToImage} alt="news screenshot"
+                height="83px" width="100px"/>
               <h4 className="header">{article.title}</h4>
             </a>
             <span className="pull-left">By {article.author}</span>
@@ -59,7 +62,7 @@ class News extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Tech News'">
+      <Popover id="tech news widget" className="aboutNewsWidget" title="About 'Tech News'">
         <p>
           This widget gives you the top 10 tech news updated several times a day.
         </p>
@@ -85,7 +88,7 @@ class News extends Component {
           &nbsp;
           Tech News
           <span className="pull-right poweredBy">
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+            <OverlayTrigger placement="bottom" overlay={this.moreInfo()}>
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
             </OverlayTrigger>
           </span>

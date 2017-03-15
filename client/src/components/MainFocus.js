@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/MainFocus.css';
 import alertify from 'alertify.js';

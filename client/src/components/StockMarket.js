@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/StockMarket.css';
 import $ from 'jquery';
@@ -28,7 +29,7 @@ class StockMarket extends Component {
     // grab the stock symbols from localStorage if exists
     var tickerSymbol = localStorage.getItem('list-of-stock-ticker-symbols');
     if (tickerSymbol) {
-      var indices = tickerSymbol.split(',');
+      indices = tickerSymbol.split(',');
     }
 
     indices.map((stockIndex, idx) => {
@@ -188,7 +189,7 @@ class StockMarket extends Component {
     if (this.state.stocks) {
       return (
         this.state.stocks.map((stock, idx) => (
-          <li className={"one-stock pull-left " + stock.stockClassName} >
+          <li className={"one-stock pull-left " + stock.stockClassName} key={idx}>
             {this.deleteIcon(idx, stock.tickerSymbol)}
             <a href={"https://www.google.com/finance?q="+stock.tickerSymbol} target="_blank">
               {this.stockTitle(stock.title)}
@@ -249,7 +250,7 @@ class StockMarket extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Stock Market'">
+      <Popover id="stock market widget" className="aboutNewsWidget" title="About 'Stock Market'">
         <p>
           This widget live streams the stock market data. You can add/delete stocks to the watchlist.
           And refresh stocks data.
@@ -273,7 +274,7 @@ class StockMarket extends Component {
             Stock Market
           </h2>
           <span className="pull-right">
-            <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
+            <OverlayTrigger placement="top" overlay={this.moreInfo()}>
               <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
             </OverlayTrigger>
           </span>

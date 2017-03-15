@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
-import { Button, Input, ButtonToolbar, Grid, Row, Col, Thumbnail } from 'react-bootstrap';
-import axios from 'axios';
+import { Grid, Row, Col } from 'react-bootstrap';
 import './stylesheets/App.css';
-import About from './components/About';
-import NotFound from './components/NotFound';
 import Todo from './components/Todo';
 import PopularLinks from './components/PopularLinks';
 import News from './components/News';
 import Postit from './components/Postit';
 import Weather from './components/Weather';
 import StockMarket from './components/StockMarket';
-import Login from './components/Login';
 import MainFocus from './components/MainFocus';
 import './stylesheets/animate.css';
 

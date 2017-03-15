@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { SocialIcon } from 'react-social-icons';
 import { Button, Input, Modal, ButtonToolbar, Grid, Row, Col, Thumbnail } from 'react-bootstrap';

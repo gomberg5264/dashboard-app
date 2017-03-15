@@ -1,11 +1,8 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import '../stylesheets/Todo.css';
 import axios from 'axios';
-import {Button, Glyphicon} from 'react-bootstrap';
-import $ from 'jquery';
-import alertify from 'alertify.js';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
-import request from 'request';
 
 class Todo extends Component {
   constructor() {
@@ -25,7 +22,7 @@ class Todo extends Component {
       .then(res => {
         var words = [];
         // retreive all the data from the api
-        res.data.results.map(result => {
+        res.data.results.forEach(result => {
           var word = {};
           if (result.headword)
             word.keyword = result.headword;
@@ -50,7 +47,7 @@ class Todo extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Weather'">
+      <Popover id="dictionary widget" className="aboutNewsWidget" title="About 'Dictionary'">
         <p>
           This widget lets you search for Engish words.
           It gives you definition, example, preposition, and pronunciation of the word.
@@ -70,7 +67,7 @@ class Todo extends Component {
       .then(res => {
         var words = [];
         // retreive all the data from the api
-        res.data.results.map(result => {
+        res.data.results.forEach(result => {
           var word = {};
           if (result.headword)
             word.keyword = result.headword;
@@ -115,8 +112,8 @@ class Todo extends Component {
   showDictionary() {
     if (this.state.words) {
       return (
-        this.state.words.map(word => (
-          <li className="word-one-definition">
+        this.state.words.map((word, idx) => (
+          <li className="word-one-definition" key={idx}>
             <div className="word-keyword">{word.keyword}</div>
             <div className="word-one-definition-details">
               <div className="word-preposition">
@@ -148,7 +145,7 @@ class Todo extends Component {
             onKeyPress={this.defineWord}
           />
         <span className="pull-right">
-          <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
+          <OverlayTrigger placement="top" overlay={this.moreInfo()}>
             <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
           </OverlayTrigger>
         </span>

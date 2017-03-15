@@ -45,66 +45,6 @@
   /*background-color: black;*/
 }
 
-.cloud {
-  padding: 3.5rem;
-  display: inline;
-  margin-left: 0;
-  margin-right: 0;
-  padding-top: 1;
-  padding-bottom: 0;
-  padding-left: 0;
-  background: url(./animatedWeatherIcons/cloudy.svg) no-repeat center;
-}
-
-.sun, .clear {
-  padding: 3.5rem;
-  width: 100px;
-  height: 100px;
-  margin-left: 5rem;
-  margin-right: 0;
-  padding-top: 1;
-  padding-bottom: 2;
-  padding-left: 0;
-  display: inline;
-  background: url(./animatedWeatherIcons/day.svg) no-repeat center;
-}
-
-.rain {
-  padding: 3.5rem;
-  display: inline;
-  margin-left: 5rem;
-  margin-right: 0;
-  padding-top: 1;
-  padding-bottom: 0;
-  padding-left: 0;
-  display: inline;
-  background: url(./animatedWeatherIcons/rainy-1.svg) no-repeat center;
-}
-
-.snow {
-  padding: 3.5rem;
-  display: inline;
-  margin-left: 5rem;
-  margin-right: 0;
-  padding-top: 1;
-  padding-bottom: 0;
-  padding-left: 0;
-  display: inline;
-  background: url(./animatedWeatherIcons/snowy-1.svg) no-repeat center;
-}
-
-.thunder {
-  padding: 3.5rem;
-  display: inline;
-  margin-left: 5rem;
-  margin-right: 0;
-  padding-top: 1;
-  padding-bottom: 0;
-  padding-left: 0;
-  display: inline;
-  background: url(./animatedWeatherIcons/thunder.svg) no-repeat center;
-}
-
 ul {
   margin-top: 3rem;
 }
@@ -143,6 +83,7 @@ ul > h3, .iconClass, .currentTemp {
   width: 80px;
   height: 80px;
   overflow: scroll;
+  background-color: rgba(1,1,1,0.3);
 }
 
 .all-forecast-day {
@@ -150,8 +91,14 @@ ul > h3, .iconClass, .currentTemp {
 }
 
 .temp-min-max-forecast {
-  font-size: 12px;
+  font-size: 13px;
 }
 
+/*weather icons*/
+.weather-icons {
+  font-size: 22px;
+}
 
-
+.weather-icon-today {
+  font-size: 30px;
+}

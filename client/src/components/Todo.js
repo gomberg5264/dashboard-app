@@ -11,18 +11,41 @@ class Todo extends Component {
   constructor() {
     super();
     this.state = {
-      list: []
+      words: []
     }
     this.moreInfo = this.moreInfo.bind(this);
     this.defineWord = this.defineWord.bind(this);
+    this.showDictionary = this.showDictionary.bind(this);
+    this.wordExample = this.wordExample.bind(this);
+    this.wordPronunciation = this.wordPronunciation.bind(this);
   }
 
   componentDidMount() {
-    var url = "https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=test&apikey=IisfAgxSFUYAYApg33kEGpgnlJhsiFcO";
-    axios.get(url)
-    .then(res => {
-      console.log(res);
-    })
+    axios.get(`https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=life&apikey=IisfAgxSFUYAYApg33kEGpgnlJhsiFcO`)
+      .then(res => {
+        var words = [];
+        // retreive all the data from the api
+        res.data.results.map(result => {
+          var word = {};
+          if (result.headword)
+            word.keyword = result.headword;
+          if (result.part_of_speech)
+            word.preposition = result.part_of_speech;
+          if (result.senses !== undefined)
+            word.definition = result.senses[0].definition[0];
+          if (result.senses !== undefined && result.senses[0].examples !== undefined)
+            word.example = result.senses[0].examples[0].text;
+          if (result.pronunciations)
+            word.pronunciation = result.pronunciations[0].ipa;
+          words.push(word);
+
+          // udpate the state with new word search
+          this.setState({
+            words
+          })
+          this.word.value = null;
+        })
+      })
   }
 
   moreInfo() {
@@ -45,19 +68,66 @@ class Todo extends Component {
     if (e.key === 'Enter') {
       axios.get(`https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=${this.word.value}&apikey=IisfAgxSFUYAYApg33kEGpgnlJhsiFcO`)
       .then(res => {
+        var words = [];
+        // retreive all the data from the api
         res.data.results.map(result => {
-          console.log(result.headword);
-          console.log(result.part_of_speech);
-          // console.log(result.pronunciations[0].ipa);
-          // console.log(result.pronunciations[0].audio[0].lang);
-          // console.log(result.pronunciations[0].audio[0].url);
-          // console.log(result.pronunciations[0].audio[1].lang);
-          // console.log(result.pronunciations[0].audio[1].url);
-          console.log(result.senses[0].definition[0]);
-          console.log(result.senses[0].examples[0].text);
-          console.log('/n');
+          var word = {};
+          if (result.headword)
+            word.keyword = result.headword;
+          if (result.part_of_speech)
+            word.preposition = result.part_of_speech;
+          if (result.senses !== undefined)
+            word.definition = result.senses[0].definition[0];
+          if (result.senses !== undefined && result.senses[0].examples !== undefined)
+            word.example = result.senses[0].examples[0].text;
+          if (result.pronunciations)
+            word.pronunciation = result.pronunciations[0].ipa;
+          words.push(word);
+
+          // udpate the state with new word search
+          this.setState({
+            words
+          })
+          this.word.value = null;
         })
       })
+    }
+  }
+
+  // return the example if exist
+  wordExample(example) {
+    if (example) {
+      return(
+        <div className="word-example"><h4>Example:</h4> {example}</div>
+      )
+    }
+  }
+
+  // return the pronuncation if exist
+  wordPronunciation(pronunciation) {
+    if (pronunciation) {
+      return(
+        <span>, pronunciation: '{pronunciation}'</span>
+      )
+    }
+  }
+
+  showDictionary() {
+    if (this.state.words) {
+      return (
+        this.state.words.map(word => (
+          <li className="word-one-definition">
+            <div className="word-keyword">{word.keyword}</div>
+            <div className="word-one-definition-details">
+              <div className="word-preposition">
+                {word.preposition} {this.wordPronunciation(word.pronunciation)}
+              </div>
+              <div className="word-definition"><h4>Definition:</h4> {word.definition}</div>
+              {this.wordExample(word.example)}
+            </div>
+          </li>
+          ))
+        )
     }
   }
 
@@ -83,6 +153,9 @@ class Todo extends Component {
           </OverlayTrigger>
         </span>
         <br />
+        <ol className="pull-left dictionary-details">
+          {this.showDictionary()}
+        </ol>
     </div>
     );
   }

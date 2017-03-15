@@ -51,7 +51,7 @@ class Weather extends Component {
           weatherObjOneDay['time'] = time,
           weatherObjOneDay['summary'] = day.summary,
           weatherObjOneDay['icon'] = day.icon,
-          weatherObjOneDay['humidity'] = day.humidity * 100,
+          weatherObjOneDay['humidity'] = Number(day.humidity * 100).toFixed(2),
           weatherObjOneDay['temperatureMin'] = day.temperatureMin,
           weatherObjOneDay['temperatureMax'] = day.temperatureMax
           weather_next_week.push(weatherObjOneDay);
@@ -90,7 +90,7 @@ class Weather extends Component {
             weatherObjOneDay['time'] = time,
             weatherObjOneDay['summary'] = day.summary,
             weatherObjOneDay['icon'] = day.icon,
-            weatherObjOneDay['humidity'] = day.humidity * 100,
+            weatherObjOneDay['humidity'] = Number(day.humidity * 100).toFixed(2),
             weatherObjOneDay['temperatureMin'] = day.temperatureMin,
             weatherObjOneDay['temperatureMax'] = day.temperatureMax
             weather_next_week.push(weatherObjOneDay);
@@ -228,9 +228,9 @@ class Weather extends Component {
             {this.weatherIcon(this.state.weather_next_week[0].icon)}
           </span>
           <div className="details">
+            <li className="weather-summary">{this.state.weather_next_week[0].icon.toUpperCase()}</li>
             <li>{this.state.weather_next_week[0].temperatureMin} &#8457;/{this.state.weather_next_week[0].temperatureMax} &#8457;</li>
             <li>Humidity: {this.state.weather_next_week[0].humidity}%</li>
-            <li className="weather-summary">{this.state.weather_next_week[0].summary}</li>
           </div>
           <ul className="all-forecast-day">
             {this.forecast()}
@@ -247,10 +247,8 @@ class Weather extends Component {
           This widget gives you the current weather and next 5 days forecast.
         </p>
         <ul>
-          <li><strong>Enter Your Zipcode</strong>: Enter your zipcode at the top, and press 'Enter'.
+          <li><strong>Add Your Zipcode</strong>: Enter your zipcode at the top, and press 'Enter'.
            It will be saved in locally the next time you visit.</li><br />
-          <li><strong>Can't Read Full Summary</strong>: If the summary is too long, hover your
-          mouse/trackpad on the summary, and scroll down to read full weather summary</li>
         </ul>
       </Popover>
     );

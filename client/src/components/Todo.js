@@ -5,6 +5,7 @@ import {Button, Glyphicon} from 'react-bootstrap';
 import $ from 'jquery';
 import alertify from 'alertify.js';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
+import request from 'request';
 
 class Todo extends Component {
   constructor() {
@@ -12,98 +13,16 @@ class Todo extends Component {
     this.state = {
       list: []
     }
-    this.addTodo = this.addTodo.bind(this);
-    this.listTodos = this.listTodos.bind(this);
-    this.deleteTodo = this.deleteTodo.bind(this);
-    this.updateTodo = this.updateTodo.bind(this);
     this.moreInfo = this.moreInfo.bind(this);
+    this.defineWord = this.defineWord.bind(this);
   }
 
   componentDidMount() {
-    axios.get('auth/login')
-    .then((response) => {
-      if (response.data.status === 'You are already logged in') {
-        axios.get('/todo/list')
-        .then((response) => {
-          this.setState({
-            list: response.data['list']
-          })
-          // console.log(response);
-        })
-        .catch((err) => { console.error(err); });
-      }
+    var url = "https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=test&apikey=IisfAgxSFUYAYApg33kEGpgnlJhsiFcO";
+    axios.get(url)
+    .then(res => {
+      console.log(res);
     })
-  }
-
-  addTodo() {
-    axios.get('auth/login')
-    .then((response) => {
-      if (response.data.status === 'You are not logged in yet') {
-        alertify.alert('Please login or register before adding a todo item. Thank you.');
-      }
-      if (response.data.status === 'You are already logged in') {
-        axios.post('/todo/new', {
-          data: this.todoItem.value
-        })
-        .then((response) => {
-          if (response.data['success']) {
-            this.todoItem.value = null;
-            this.componentDidMount();
-          }
-        })
-        .catch((err) => { console.error(err); });
-      }
-   });
-  }
-
-  deleteTodo(id) {
-    axios.post('/todo/delete', {
-      id: id
-    })
-    .then((response) => {
-      if (response.data['success']) {
-        this.componentDidMount();
-      }
-    })
-    .catch((err) => { console.error(err); });
-  }
-
-  updateTodo(id, title) {
-    const content = `<input class="inputClass" type="text" value="${title}" id="todo-input-${id}" />
-                     <input type="submit" value="Save" id="add-todo-${id}" />`;
-    var newTitle = null;
-    $(`#todo-${id}`).html(content);
-    $(`#add-todo-${id}`).click(() => {
-      newTitle = $(`#todo-input-${id}`).val();
-      // console.log(newTitle);
-      axios.post('/todo/update', {
-         id: id,
-         newTitle: newTitle
-      })
-      .then((response) => {
-        if (response.data['success']) {
-          // issue with edit: need to refresh before the data shows from database
-          // temporary fix for edit, showing hardcoded text value, not from database
-          // refresh the list from database after done editing
-          $(`#todo-${id}`).html(newTitle);
-        }
-      })
-      .catch((err) => { console.error(err); });
-    })
-  }
-
-  listTodos() {
-      return (
-        this.state.list.map(elem => (
-          <li id={`todo-${elem.id}`}><span className="pull-left">{elem.title}</span>
-              &nbsp;&nbsp;&nbsp;
-            <Glyphicon className="pull-right" onClick={() => this.deleteTodo(elem.id)} glyph="glyphicon glyphicon-trash align-right" />
-            &nbsp;&nbsp;
-            <Glyphicon className="pull-right" onClick={() => this.updateTodo(elem.id, elem.title)} glyph="glyphicon glyphicon-pencil align-right" />
-          </li>
-          )
-        )
-    )
   }
 
   moreInfo() {
@@ -122,6 +41,26 @@ class Todo extends Component {
     );
   }
 
+  defineWord(e) {
+    if (e.key === 'Enter') {
+      axios.get(`https://api.pearson.com/v2/dictionaries/ldoce5/entries?headword=${this.word.value}&apikey=IisfAgxSFUYAYApg33kEGpgnlJhsiFcO`)
+      .then(res => {
+        res.data.results.map(result => {
+          console.log(result.headword);
+          console.log(result.part_of_speech);
+          // console.log(result.pronunciations[0].ipa);
+          // console.log(result.pronunciations[0].audio[0].lang);
+          // console.log(result.pronunciations[0].audio[0].url);
+          // console.log(result.pronunciations[0].audio[1].lang);
+          // console.log(result.pronunciations[0].audio[1].url);
+          console.log(result.senses[0].definition[0]);
+          console.log(result.senses[0].examples[0].text);
+          console.log('/n');
+        })
+      })
+    }
+  }
+
   render() {
     return (
       <div className="main_Todo text-center">
@@ -135,8 +74,8 @@ class Todo extends Component {
             className="weather-input text-center"
             type="text"
             placeholder="Enter Your Word"
-            ref={(input) => { this.todoItem = input; }}
-            onKeyPress={this.addTodo}
+            ref={(input) => { this.word = input; }}
+            onKeyPress={this.defineWord}
           />
         <span className="pull-right">
           <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
@@ -144,7 +83,6 @@ class Todo extends Component {
           </OverlayTrigger>
         </span>
         <br />
-        {this.listTodos()}
     </div>
     );
   }

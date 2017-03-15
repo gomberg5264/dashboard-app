@@ -52,13 +52,13 @@ class Todo extends Component {
     return (
       <Popover className="aboutNewsWidget" title="About 'Weather'">
         <p>
-          This widget gives you the current weather and next 5 days forecast.
+          This widget lets you search for Engish words.
+          It gives you definition, example, preposition, and pronunciation of the word.
         </p>
         <ul>
-          <li><strong>Enter Your Zipcode</strong>: Enter your zipcode at the top, and press 'Enter'.
-           It will be saved in locally the next time you visit.</li><br />
-          <li><strong>Can't Read Full Summary</strong>: If the summary is too long, hover your
-          mouse/trackpad on the summary, and scroll down to read full weather summary</li>
+          <li><strong>Search A Word</strong>: Enter the word at the top, and press 'Enter'.
+           You'll see a list of words related to the searched word. Scroll down to see them all.
+           </li>
         </ul>
       </Popover>
     );
@@ -143,7 +143,7 @@ class Todo extends Component {
           <input
             className="weather-input text-center"
             type="text"
-            placeholder="Enter Your Word"
+            placeholder="Enter A Word"
             ref={(input) => { this.word = input; }}
             onKeyPress={this.defineWord}
           />

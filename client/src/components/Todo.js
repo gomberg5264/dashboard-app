@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Button, Glyphicon} from 'react-bootstrap';
 import $ from 'jquery';
 import alertify from 'alertify.js';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
 
 class Todo extends Component {
   constructor() {
@@ -14,7 +15,8 @@ class Todo extends Component {
     this.addTodo = this.addTodo.bind(this);
     this.listTodos = this.listTodos.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
-    this.udpateTodo = this.updateTodo.bind(this);
+    this.updateTodo = this.updateTodo.bind(this);
+    this.moreInfo = this.moreInfo.bind(this);
   }
 
   componentDidMount() {
@@ -104,28 +106,46 @@ class Todo extends Component {
     )
   }
 
+  moreInfo() {
+    return (
+      <Popover className="aboutNewsWidget" title="About 'Weather'">
+        <p>
+          This widget gives you the current weather and next 5 days forecast.
+        </p>
+        <ul>
+          <li><strong>Enter Your Zipcode</strong>: Enter your zipcode at the top, and press 'Enter'.
+           It will be saved in locally the next time you visit.</li><br />
+          <li><strong>Can't Read Full Summary</strong>: If the summary is too long, hover your
+          mouse/trackpad on the summary, and scroll down to read full weather summary</li>
+        </ul>
+      </Popover>
+    );
+  }
+
   render() {
     return (
       <div className="main_Todo text-center">
-        <h2>Todos</h2>
-        <hr />
-        <input
-          className="inputClass"
-          type="text"
-          placeholder="Enter Todo Item"
-          ref={(input) => { this.todoItem = input; }}
-        />
-        &nbsp;
-        <input
-          className="add_button"
-          type="button"
-          value="Add"
-          onClick={this.addTodo}
-        />
-        <ul>
-          {this.listTodos()}
-        </ul>
-      </div>
+        <h2 className="pull-left">
+          &nbsp;
+          <i className="fa fa-book" aria-hidden="true"></i>
+          &nbsp;
+          Dictionary
+        </h2>
+          <input
+            className="weather-input text-center"
+            type="text"
+            placeholder="Enter Your Word"
+            ref={(input) => { this.todoItem = input; }}
+            onKeyPress={this.addTodo}
+          />
+        <span className="pull-right">
+          <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
+            <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+          </OverlayTrigger>
+        </span>
+        <br />
+        {this.listTodos()}
+    </div>
     );
   }
 }

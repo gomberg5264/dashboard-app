@@ -8,6 +8,7 @@ import $ from 'jquery';
 import moment from 'moment';
 import '../stylesheets/weather-icons-wind.min.css';
 import '../stylesheets/weather-icons.min.css';
+import alertify from 'alertify.js';
 
 class Weather extends Component {
   constructor() {
@@ -102,6 +103,8 @@ class Weather extends Component {
             weather_next_week
           });
           localStorage.setItem('dashboard-app-my-zip-code', this.zipCode.value);
+          alertify.logPosition('top left');
+          alertify.log(`Weather: Zipcode ${this.zipCode.value} saved!`)
           this.zipCode.value = null;
         })
       })

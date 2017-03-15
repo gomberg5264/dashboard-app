@@ -21,7 +21,7 @@ class PopularLinks extends Component {
 
   moreInfo() {
     return (
-      <Popover className="aboutNewsWidget" title="About 'Apps Links'">
+      <Popover className="aboutNewsWidget" title="About 'Links'">
         <p>
           This widget has the links to some of the most popular apps that you may visit daily.
         </p>
@@ -101,16 +101,18 @@ class PopularLinks extends Component {
   render() {
     return (
       <div className="main_PopularLinks text-center">
-        <h2>
+        <h2 className="pull-left">
+          &nbsp;
           <i className="fa fa-link" aria-hidden="true"></i>
           &nbsp;
-          Apps Link
-          <span className="pull-right">
-            <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
-              <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
-            </OverlayTrigger>
-          </span>
+          Links
         </h2>
+        <span className="pull-right">
+          <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+            <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
+          </OverlayTrigger>
+        </span>
+        <br /><br />
         {this.showList()}
         <br />
       </div>

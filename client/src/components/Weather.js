@@ -15,7 +15,8 @@ class Weather extends Component {
     this.state = {
       city: null,
       currentTemp: null,
-      weather_next_week: []
+      weather_next_week: [],
+      zipcode: 10013,
     }
     this.addZipcode = this.addZipcode.bind(this);
     this.weatherInfo = this.weatherInfo.bind(this);
@@ -25,7 +26,11 @@ class Weather extends Component {
   }
 
   componentDidMount() {
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=10013&key=${apiKeys.googleMapsAPI}`)
+    var zipcode = localStorage.getItem('dashboard-app-my-zip-code');
+    if (!zipcode) {
+      zipcode = this.state.zipcode;
+    }
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=${apiKeys.googleMapsAPI}`)
     .then((g_maps_response) => {
       var lng = g_maps_response.data.results[0].geometry.location.lng;
       var lat = g_maps_response.data.results[0].geometry.location.lat;
@@ -65,36 +70,45 @@ class Weather extends Component {
     // when Enter is press from input, then exectue
     if (e.key === 'Enter') {
       axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.zipCode.value}&key=${apiKeys.googleMapsAPI}`)
-      .then((response) => {
-        var lng = response.data.results[0].geometry.location.lng;
-        var lat = response.data.results[0].geometry.location.lat;
-        var city = response.data.results[0].address_components[1].long_name;
-        axios.get(`http://api.openweathermap.org/data/2.5/forecast?zip=${this.zipCode.value},us&appid=${apiKeys.openWeatherAPI}`)
-        .then((res) => {
-          this.zipCode.value = null;
-          this.setState({
-            currentCity: city,
-            currentTemp: this.kelvinToFarenheit(res.data.list[0].main.temp),
-            currentTempMin: this.kelvinToFarenheit(res.data.list[0].main.temp_min),
-            currentTempMax: this.kelvinToFarenheit(res.data.list[0].main.temp_max),
-            currentSummary: res.data.list[0].weather[0].description,
-            currentTime: res.data.list[0].dt,
-            currentHumidity: res.data.list[0].main.humidity
-          })
-          console.log(lat);
-          console.log(lng);
-          console.log(this.state.currentTemp);
-          console.log(this.state.currentTempMin);
-          console.log(this.state.currentTempMax);
-          // console.log(this.state);
+      .then((g_maps_response) => {
+        var lng = g_maps_response.data.results[0].geometry.location.lng;
+        var lat = g_maps_response.data.results[0].geometry.location.lat;
+        var city = g_maps_response.data.results[0].address_components[1].long_name;
+        $.ajax({
+          type: 'GET',
+          dataType: 'JSONP',
+          crossDomain: true,
+          url: `https://api.darksky.net/forecast/${apiKeys.darkSkyAPI}/${lat},${lng}`,
         })
-      })
-      .catch(function (error) {
-        console.log(error);
+        .done((darksky_response) => {
+          var currentTemp = darksky_response.currently.temperature;
+          var weather_next_week = [];
+          darksky_response.daily.data.map(day => {
+            var weatherObjOneDay = {};
+            var time = moment.unix(day.time).format("dddd");
+            weatherObjOneDay['time'] = time,
+            weatherObjOneDay['summary'] = day.summary,
+            weatherObjOneDay['icon'] = day.icon,
+            weatherObjOneDay['humidity'] = day.humidity * 100,
+            weatherObjOneDay['temperatureMin'] = day.temperatureMin,
+            weatherObjOneDay['temperatureMax'] = day.temperatureMax
+            weather_next_week.push(weatherObjOneDay);
+          })
+          // get weather for next six days from today, not seven days
+          weather_next_week = weather_next_week.slice(0,7);
+          this.setState({
+            city,
+            currentTemp,
+            weather_next_week
+          });
+          localStorage.setItem('dashboard-app-my-zip-code', this.zipCode.value);
+          this.zipCode.value = null;
+        })
       })
     }
   }
 
+  // add weather icons depending on weather conditions
   weatherIcon(icon) {
     switch(icon) {
      case("clear-day"):
@@ -211,9 +225,9 @@ class Weather extends Component {
             {this.weatherIcon(this.state.weather_next_week[0].icon)}
           </span>
           <div className="details">
-            <li>{this.state.weather_next_week[0].summary}</li>
             <li>{this.state.weather_next_week[0].temperatureMin} &#8457;/{this.state.weather_next_week[0].temperatureMax} &#8457;</li>
             <li>Humidity: {this.state.weather_next_week[0].humidity}%</li>
+            <li className="weather-summary">{this.state.weather_next_week[0].summary}</li>
           </div>
           <ul className="all-forecast-day">
             {this.forecast()}
@@ -227,12 +241,14 @@ class Weather extends Component {
     return (
       <Popover className="aboutNewsWidget" title="About 'Weather'">
         <p>
-          This widget gives you the current weather and short summary.
-          You can just enter your zipcode and press Enter.
+          This widget gives you the current weather and next 5 days forecast.
         </p>
-        <p>
-          This widget is powered by Open Weather API.
-        </p>
+        <ul>
+          <li><strong>Enter Your Zipcode</strong>: Enter your zipcode at the top, and press 'Enter'.
+           It will be saved in locally the next time you visit.</li><br />
+          <li><strong>Can't Read Full Summary</strong>: If the summary is too long, hover your
+          mouse/trackpad on the summary, and scroll down to read full weather summary</li>
+        </ul>
       </Popover>
     );
   }
@@ -241,6 +257,9 @@ class Weather extends Component {
     return (
       <div className="main_Weather text-center">
         <h2 className="pull-left">
+          &nbsp;
+          <i className="fa fa-thermometer-three-quarters" aria-hidden="true"></i>
+          &nbsp;
           Weather
         </h2>
           <input
@@ -251,7 +270,7 @@ class Weather extends Component {
             onKeyPress={this.addZipcode}
           />
         <span className="pull-right">
-          <OverlayTrigger trigger="hover" placement="bottom" overlay={this.moreInfo()}>
+          <OverlayTrigger trigger="hover" placement="top" overlay={this.moreInfo()}>
             <i className="fa fa-info-circle moreInfoBtn" aria-hidden="true"></i>
           </OverlayTrigger>
         </span>

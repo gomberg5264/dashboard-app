@@ -1,13 +1,12 @@
 {
-  "main.css": "static/css/main.d16f32bd.css",
-  "main.css.map": "static/css/main.d16f32bd.css.map",
-  "main.js": "static/js/main.5e349a69.js",
-  "main.js.map": "static/js/main.5e349a69.js.map",
-  "static/media/cloudy.svg": "static/media/cloudy.ad789581.svg",
-  "static/media/day.svg": "static/media/day.7f93fbdb.svg",
-  "static/media/rainy-1.svg": "static/media/rainy-1.f134a51c.svg",
-  "static/media/snowy-1.svg": "static/media/snowy-1.f78cba60.svg",
-  "static/media/the_next_web_logo.png": "static/media/the_next_web_logo.332a31b8.png",
-  "static/media/thunder.svg": "static/media/thunder.7142c78b.svg",
+  "main.css": "static/css/main.a61f6ec5.css",
+  "main.css.map": "static/css/main.a61f6ec5.css.map",
+  "main.js": "static/js/main.b509306c.js",
+  "main.js.map": "static/js/main.b509306c.js.map",
+  "static/media/weathericons-regular-webfont.eot": "static/media/weathericons-regular-webfont.4b658767.eot",
+  "static/media/weathericons-regular-webfont.svg": "static/media/weathericons-regular-webfont.ecaf8b48.svg",
+  "static/media/weathericons-regular-webfont.ttf": "static/media/weathericons-regular-webfont.4618f0de.ttf",
+  "static/media/weathericons-regular-webfont.woff": "static/media/weathericons-regular-webfont.8cac70eb.woff",
+  "static/media/weathericons-regular-webfont.woff2": "static/media/weathericons-regular-webfont.1cd48d78.woff2",
   "static/media/wood_bg.jpg": "static/media/wood_bg.097e329b.jpg"
 }

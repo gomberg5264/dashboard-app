@@ -6,8 +6,8 @@ import apiKeys from '../config.js';
 import {Popover, OverlayTrigger} from 'react-bootstrap';
 import $ from 'jquery';
 import moment from 'moment';
-import '../stylesheets/weather-icons-wind.min.css';
-import '../stylesheets/weather-icons.min.css';
+// import '../stylesheets/weather-icons-wind.min.css';
+// import '../stylesheets/weather-icons.min.css';
 import alertify from 'alertify.js';
 
 class Weather extends Component {

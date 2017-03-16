@@ -37,7 +37,7 @@ class StockMarket extends Component {
         type: 'GET',
         dataType: 'JSONP',
         crossDomain: true,
-        url: `http://finance.google.com/finance/info?client=ig&q=${stockIndex}`,
+        url: `https://finance.google.com/finance/info?client=ig&q=${stockIndex}`,
       })
       .done((response) => {
         const jsonData = response[0];
@@ -89,7 +89,7 @@ class StockMarket extends Component {
         type: 'GET',
         dataType: 'JSONP',
         crossDomain: true,
-        url: `http://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
+        url: `https://finance.google.com/finance/info?client=ig&q=${this.stockSymbol.value}`,
       })
       .done((response) => {
         const jsonData = response[0];

@@ -77,8 +77,10 @@ hr {
 }
 
 .one-stock {
-  width: 132px;
-  height: 90px;
+  /*width: 132px;
+  height: 90px;*/
+  width: 13rem;
+  height: 9rem;
   display: inline-block;
   margin-left: 10px;
   margin-bottom: 10px;
@@ -106,7 +108,6 @@ hr {
 
 .lastUpdate {
   margin-bottom: 10px;
-
 }
 
 .all-stocks {

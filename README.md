@@ -1,18 +1,17 @@
-# dashboard-app
+# Dashboard 
 
-[Live Demo](https://your-dashboard.herokuapp.com/)
+### [Demo](https://tenzin15.github.io/dashboard/)
 
-### When you open your laptop for the first time in the morning, this is app you want to go to. It is a dashboard app that has all the things like weather, stock market data, todos list, quick note, latest news of the day, etc. 
+This a dashboard app that has widgets like latest news feed, current weather report, stock market data, calendar, dictionary, and a convenient collection of your daily favorite apps like Facebook, Twitter, Dropbox, etc. 
+
+When you open your computer for the first time in the morning, this is the app you want to visit because all of your basic daily needs are conveniently put together all in one place - this dashboard.
 
 ### This is how the app looks like.
- ![Screenshot of the App](./screenShot.png)
+ ![Screenshot of the App](./your_dashboard_ss.png)
 
 ### Technologies Used:
-    In terms of classical MVC web framework, for Model I used Postgrés, for View I used React, and for Controller I used Express.
-    Details:
-        * HTML5/CSS3/JS6
-        * Node/Express
-        * React
-        * Postgrés
-        * 3rd Party APIs: Google Finance API for Stock Market Data, Open Weather API for Weather Data, News API for top latest news of the day. 
-        
+
+    Model: Browser LocalStorage 
+    View: React, Bootstrap 
+    Controller: React 
+    APIs: Google Finance API, Open Weather API, Google Maps API, DarkSky API, and News API, Pearson API.

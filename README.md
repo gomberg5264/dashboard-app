@@ -10,8 +10,7 @@ When you open your computer for the first time in the morning, this is the app y
  ![Screenshot of the App](./your_dashboard_ss.png)
 
 ### Technologies Used:
-
-    Model: Browser LocalStorage 
-    View: React, Bootstrap 
-    Controller: React 
-    APIs: Google Finance API, Open Weather API, Google Maps API, DarkSky API, and News API, Pearson API.
+*   Model: Browser LocalStorage 
+*   View: React, Bootstrap 
+*   Controller: React 
+*   APIs: Google Finance API, Open Weather API, Google Maps API, DarkSky API, and News API, Pearson API.

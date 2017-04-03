@@ -31,7 +31,7 @@ class Postit extends Component {
     }
     else {
       notes = [];
-      notes.push('No Events Added Yet!');
+      notes.push('No Events Yet!');
     }
     this.setState({
       selectedDay,
@@ -49,7 +49,7 @@ class Postit extends Component {
     }
     else {
       notes = [];
-      notes.push('No Events Added Yet!');
+      notes.push('No Events Yet!');
     }
 
     this.setState({
@@ -60,7 +60,7 @@ class Postit extends Component {
 
   save(e) {
     if (e.key === 'Enter') {
-      if (this.state.notes[0] === 'No Events Added Yet!') {
+      if (this.state.notes[0] === 'No Events Yet!') {
         var note = [];
         note.push(this.note.value);
         // save the note in localstorage
